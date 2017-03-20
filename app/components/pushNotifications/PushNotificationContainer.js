@@ -2,9 +2,10 @@ import React, {Component} from 'react'
 import {
   Picker,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native'
-import styles from '../assets/styles'
+import styles from '../../assets/styles'
 
 export default class PushNotificationsContainer extends Component {
   constructor (){
@@ -52,9 +53,7 @@ export default class PushNotificationsContainer extends Component {
     return(
       <View style={styles.backgroundView}>
         <View style={styles.pushNotificationsView}>
-            <View style={styles.textView}>
-              <Text style={styles.appText}>Set a reminder for:</Text>
-            </View>
+            <Text style={styles.appText}>Set a reminder for:</Text>
             <View style={styles.pushPickersView}>
               <View style={styles.timePickerView}>
                 <Picker
@@ -81,6 +80,7 @@ export default class PushNotificationsContainer extends Component {
                 </Picker>
               </View>
             </View>
+            <TouchableOpacity style={styles.purpleButtonRounded}><Text style={styles.buttonText}>Save</Text></TouchableOpacity>
         </View>
       </View>
     )

@@ -17,27 +17,34 @@ export default StyleSheet.create({
   altAppText: {
     color: '#ffffff'
   },
-  textView: {
-    flex: 1
+  buttonText: {
+    color: '#ffffff',
+    textAlign: 'center',
+    fontSize: 15
   },
   pushNotificationsView: {
-    height: 100,
+    height: 400,
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   timePickerView:{
     flex: 1 //NEEDED TO FIX BUG
   },
   timePicker: {
-    height: '50%',
-    backgroundColor: '#212121'
+    backgroundColor: '#eaeaea'
   },
   pushPickersView: {
     flex: 1, // NEEDED TO FIX BUG
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-
-  }
+  },
+  purpleButtonRounded: {
+   backgroundColor: '#BD95AF',
+   paddingVertical:10,
+   paddingHorizontal: 10,
+   width: '50%',
+   borderRadius: 10
+ }
 })

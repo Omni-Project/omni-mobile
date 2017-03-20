@@ -6,8 +6,8 @@ import {
   View
 } from 'react-native';
 
-import styles from './assets/styles'
-import PushNotificationContainer from './components/PushNotificationContainer'
+import styles from './app/assets/styles'
+import PushNotificationContainer from './app/components/pushNotifications/PushNotificationContainer'
 import Home from './app/components/home/Home';
 
 
