@@ -15,21 +15,12 @@ export default class Foot extends Component {
         return (
                 <View style={styles.container}>
                 <Footer>
-                    <Button transparent iconCenter>
-                        <Icon name='moon' />
-                    </Button>
-
-                    <Button transparent iconCenter>
-                        <Icon name='home' />
-                    </Button>
-
-                    <Button transparent iconCenter>
-                        <Icon name='stats' />
-                    </Button>
-
-                    <Button transparent iconCenter>
-                        <Icon name='settings' />
-                    </Button>
+                  {/*EI: map over an array to create this JSX */}
+                    ['moon', 'home', 'stats', 'settings'].map(name =>
+                      <Button transparent iconCenter>
+                          <Icon name={name} />
+                      </Button>
+                    )
                 </Footer>
                 </View>
             );

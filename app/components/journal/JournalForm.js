@@ -10,51 +10,50 @@ import {
 } from 'react-native';
 import { Content, Card, CardItem, Left, Body, Button, Icon } from 'native-base';
 
+// EI: be careful with formatting, it can have a big effect on readability. can you make some sub-components here?
 export default class JournalForm extends Component {
-    render() {
-        return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+  render() {
+    return (
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <Content>
+        <Card>
 
-                <Content>
-                    <Card>
-                        <CardItem bordered>
-                            <Left>
-                                <Body>
-                                  <TextInput style={styles.input} placeholder='Dream Title'/>
-                                  <Text note>April 15, 2016</Text>
-                                </Body>
-                            </Left>
-                        </CardItem>
+          <CardItem bordered>
+              <Left>
+                <Body>
+                  <TextInput style={styles.input} placeholder='Dream Title'/>
+                  <Text note>April 15, 2016</Text>
+                </Body>
+              </Left>
+          </CardItem>
 
-                        <CardItem>
-                            <Body>
-                            <TextInput style={styles.input} placeholder='Write about your dream here'/>
-                                
-                                <View style={styles.buttons}>
-                                    <View style={styles.editButton}>
-                                    <Button transparent textStyle={{color: '#87838B'}}>
-                                        <Icon name="create" />
-                                        <Text>Edit</Text>
-                                    </Button>
-                                    </View>
-                                
-                                    <View style={styles.tagButton}>
-                                    <Button transparent textStyle={{color: '#87838B'}}>
-                                        <Icon name="pricetags" />
-                                        <Text>Tags</Text>
-                                    </Button>
-                                    </View>
-                                </View>
+          <CardItem>
+            <Body>
+            <TextInput style={styles.input} placeholder='Write about your dream here'/>
 
+              <View style={styles.buttons}>
+                <View style={styles.editButton}>
+                <Button transparent textStyle={{color: '#87838B'}}>
+                    <Icon name="create" />
+                    <Text>Edit</Text>
+                </Button>
+                </View>
 
-                            </Body>
-                        </CardItem>
-                   </Card>
-                </Content>
+                <View style={styles.tagButton}>
+                <Button transparent textStyle={{color: '#87838B'}}>
+                    <Icon name="pricetags" />
+                    <Text>Tags</Text>
+                </Button>
+                </View>
+              </View>
+            </Body>
+          </CardItem>
 
-      </KeyboardAvoidingView>
-        );
-    }
+        </Card>
+      </Content>
+    </KeyboardAvoidingView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
