@@ -30,8 +30,8 @@ export default StyleSheet.create({
     flex: 1 //NEEDED TO FIX BUG
   },
   timePicker: {
-    height: 40,
-    backgroundColor: '#212121',
+    height: '50%',
+    backgroundColor: '#212121'
   },
   pushPickersView: {
     flex: 1, // NEEDED TO FIX BUG

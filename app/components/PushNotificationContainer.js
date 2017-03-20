@@ -66,6 +66,7 @@ export default class PushNotificationsContainer extends Component {
               </View>
               <View style={styles.timePickerView}>
                 <Picker
+                  style={styles.timePicker}
                   selectedValue={this.state.minutes}
                   onValueChange={(val) => this.handleChange('minutes', val)}>
                   { minOptions.map(num => <Picker.Item style={styles.altAppText} label={num} value={num} key={`min-${num}`}/>)}
@@ -73,6 +74,7 @@ export default class PushNotificationsContainer extends Component {
               </View>
               <View style={styles.timePickerView}>
                 <Picker
+                style={styles.timePicker}
                 selectedValue={this.state.type}
                 onValueChange={(val) => this.handleChange('type', val)}>
                 { typeOptions.map(type => <Picker.Item style={styles.altAppText} label={type} value={type} key={type}/>)}
