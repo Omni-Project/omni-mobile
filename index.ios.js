@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -11,16 +5,17 @@ import {
   Text,
   View
 } from 'react-native';
+
 import styles from './assets/styles'
 import PushNotificationContainer from './components/PushNotificationContainer'
+import Home from './app/components/home/Home';
+
 
 export default class DreamscapeMobile extends Component {
   render() {
     return (
-      <View style={styles.backgroundView}>
-        <Text style={styles.appText}>
-          Landing Page
-        </Text>
+      <View style={styles.container}>
+        <Home />
       </View>
     );
   }

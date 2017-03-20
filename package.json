@@ -1,22 +1,50 @@
 {
-	"name": "DreamscapeMobile",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"react": "~15.4.1",
-		"react-native": "0.42.0"
-	},
-	"devDependencies": {
-		"babel-jest": "19.0.0",
-		"babel-preset-react-native": "1.9.1",
-		"jest": "19.0.2",
-		"react-test-renderer": "~15.4.1"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "DreamscapeMobile",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.15.3",
+    "file-loader": "^0.10.1",
+    "native-base": "^2.0.13",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-native": "0.42.0",
+    "react-native-blur": "^2.0.0",
+    "react-native-button-component": "^0.1.16",
+    "react-native-easy-grid": "^0.1.8",
+    "react-native-floating-label-text-input": "^0.1.2",
+    "react-native-keyboard-aware-scroll-view": "^0.2.7",
+    "react-native-spinkit": "^1.0.2",
+    "react-native-svg": "^5.1.5",
+    "react-native-swiper": "^1.5.4",
+    "react-native-vector-icons": "^4.0.0",
+    "react-native-web": "0.0.77",
+    "react-redux": "^5.0.3",
+    "react-router": "^4.0.0",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.8.2",
+    "redux-thunk": "^2.2.0",
+    "victory-native": "^0.6.0"
+  },
+  "devDependencies": {
+    "babel-jest": "19.0.0",
+    "babel-loader": "^6.4.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-react-native": "1.9.1",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-runtime": "^6.23.0",
+    "jest": "19.0.2",
+    "react-test-renderer": "~15.4.1",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }
