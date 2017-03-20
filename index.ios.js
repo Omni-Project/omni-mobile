@@ -21,6 +21,9 @@ export default class DreamscapeMobile extends Component {
       this.setState(store.getState().auth)
     })
   }
+  componentWillUnmount(){
+    this.unsubscribe()
+  }
   render() {
     return (
       <View style={landingPageStyles.appContainer}>
