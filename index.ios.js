@@ -21,4 +21,4 @@ export default class DreamscapeMobile extends Component {
   }
 }
 
-AppRegistry.registerComponent('DreamscapeMobile', () => PushNotificationContainer);
+AppRegistry.registerComponent('DreamscapeMobile', () => DreamscapeMobile);

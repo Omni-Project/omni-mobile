@@ -14,13 +14,17 @@ export default StyleSheet.create({
   appText: {
     color: '#eaeaea'
   },
+  biggerAppText: {
+    color: '#eaeaea',
+    fontSize: 20
+  },
   altAppText: {
     color: '#ffffff'
   },
   buttonText: {
     color: '#ffffff',
     textAlign: 'center',
-    fontSize: 15
+    fontSize: 20
   },
   pushNotificationsView: {
     height: 400,
@@ -32,7 +36,7 @@ export default StyleSheet.create({
     flex: 1 //NEEDED TO FIX BUG
   },
   timePicker: {
-    backgroundColor: '#eaeaea'
+    backgroundColor: '#212121'
   },
   pushPickersView: {
     flex: 1, // NEEDED TO FIX BUG
