@@ -9,11 +9,12 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import { Container, Content, Button, Icon, Footer } from 'native-base';
+import { footerStyles } from '../../assets/styles';
 
 export default class Foot extends Component {
     render() {
         return (
-                <View style={styles.container}>
+                <View style={footerStyles.container}>
                 <Footer>
                     <Button transparent iconCenter>
                         <Icon name='moon' />
@@ -35,12 +36,3 @@ export default class Foot extends Component {
             );
         }
     }
-
-
-
-const styles = StyleSheet.create({
-  container: {
-      width: '100%',
-    alignItems: 'stretch',
-  }
-});
