@@ -44,7 +44,6 @@ export default class PushNotificationsContainer extends Component {
         message: "Be sure to log your dream today!", // (required)
         date: new Date(yyyy,mm,(dd+i),hour,min,0) // in 60 secs
       });
-      console.log(new Date(yyyy,mm,(dd+i),hour,min,0))
     }
   }
   makeHours(){
