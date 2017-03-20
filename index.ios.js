@@ -5,23 +5,18 @@ import {
   Text,
   View
 } from 'react-native';
-import Home from './app/components/home/Home';
+import Login from './app/components/login/Login'
+import {landingPageStyles} from './app/assets/styles'
 
 export default class DreamscapeMobile extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Home />
+      <View style={landingPageStyles.appContainer}>
+        <Login />
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#242424'
-  }
-});
 
 AppRegistry.registerComponent('DreamscapeMobile', () => DreamscapeMobile);

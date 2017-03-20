@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
+export const landingPageStyles = StyleSheet.create({
+    appContainer: {
+        backgroundColor: '#242424',
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+});
+
 export const journalStyles = StyleSheet.create({
   container: {
     justifyContent: 'space-around'

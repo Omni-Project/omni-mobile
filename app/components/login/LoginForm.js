@@ -17,7 +17,8 @@ export default class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ''
+      email: '',
+      password: ''
     };
 
   }
@@ -29,25 +30,21 @@ export default class LoginForm extends Component {
         <StatusBar
             barStyle='light-content'
         />
-
         <TextInput
             style={loginFormStyles.input}
             placeholder="Email"
             placeholderTextColor='#ffffff'
-            returnKeyType= "go"
+            returnKeyType= "done"
             autoCorrect={false}
         />
-
         <TextInput
             style={loginFormStyles.input}
             placeholder="Password"
             placeholderTextColor='#ffffff'
-            returnKeyType= "go"
+            returnKeyType= "done"
             autoCorrect={false}
         />
-
         <View style={loginFormStyles.buttonContainer}>
-
           <View style={loginFormStyles.button}>
             <TouchableOpacity>
               <Text style={loginFormStyles.buttonTxt}>Login</Text>
