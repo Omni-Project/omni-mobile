@@ -3,17 +3,16 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
-
-
 import styles from './app/assets/styles'
 import PushNotificationContainer from './app/components/pushNotifications/PushNotificationContainer'
 import Home from './app/components/home/Home';
 import Login from './app/components/login/Login'
-import Home from './app/components/home/Home'
 import {landingPageStyles} from './app/assets/styles'
 import store from './app/store'
+
 
 
 
@@ -31,14 +30,22 @@ export default class DreamscapeMobile extends Component {
   componentWillUnmount(){
     this.unsubscribe()
   }
+
+
   render() {
+
     return (
       <View style={landingPageStyles.appContainer}>
-        { this.state? <Home /> : <Login />}
+        { this.state ? <Home /> : <Login /> }
       </View>
-    );
+    )
   }
 }
+
+
+
+
+
 
 AppRegistry.registerComponent('DreamscapeMobile', () => DreamscapeMobile);
 

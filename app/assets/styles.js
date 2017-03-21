@@ -65,15 +65,17 @@ export const landingPageStyles = StyleSheet.create({
 
 export const journalStyles = StyleSheet.create({
   container: {
-    justifyContent: 'space-around'
+    backgroundColor: '#999'
   },
-  input: {
-      color: "black",
+
+  text: {
+      color: "white",
       marginTop: 5,
       textAlign: 'left',
       opacity: 0.9,
       fontSize: 15,
       height: 25,
+      width: '100%'
     },
     buttons: {
         flexDirection: 'row'
@@ -83,6 +85,9 @@ export const journalStyles = StyleSheet.create({
     },
     tagButton: {
         alignItems: 'flex-end'
+    },
+    saveButton: {
+      color: 'white'
     }
 });
 
@@ -150,3 +155,14 @@ export const loginFormStyles = StyleSheet.create({
   }
 
 });
+
+
+export const homeStyles = StyleSheet.create({
+  textContainer: {
+    padding: '10%'
+  },
+  text: {
+    color: '#fff'
+  }
+
+})
