@@ -6,42 +6,65 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Switch
 } from 'react-native';
 import { Content, Card, CardItem, Left, Body, Button, Icon, Container } from 'native-base';
 import {Select, Option} from "react-native-chooser";
 import { journalStyles } from '../../assets/styles';
-import { TimePicker, DatePick } from '../pickers/Pickers'
-import Switch from '../switch/Switch'
+import { TimePickerEnd, TimePickerStart, DatePick } from '../pickers/Pickers'
+import store from '../../store'
+import { receiveJournalEntry } from '../../reducers/dreams'
 
 export default class JournalForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {text: ''}
+        this.state = {
+            title: '',
+            content: '',
+            dreamType: null,
+            date: null,
+            timeStart: null,
+            timeEnd: null,
+            isPublic: false
     }
+    this.handleTimeChange = this.handleTimeChange.bind(this);
+    this.onJournalSave = this.onJournalSave.bind(this);
+}
+  handleTimeChange (v, field) {
+    this.setState({[field]: v})
+    console.log(field, v);
+  }
+
+  onJournalSave() {
+    let journalData = Object.assign({}, this.state);
+    // console.log('journalData', journalData);
+    // this.props.onJournalSave(journalData);
+    store.dispatch(receiveJournalEntry(journalData))
+}
 
     render() {
         return (
       <KeyboardAvoidingView behavior="padding" >
-
+{/*This is where User selects in Date of Dream*/}
       <View>
         <Text style={journalStyles.text}>Dream Date</Text>
-        <DatePick />
+        <DatePick handleTimeChange={this.handleTimeChange} date={this.state.date} />
       </View>
-
+{/*This is where User writes in Title of their Dream*/}
       <View style={journalStyles.container}>
         <TextInput
-            onChangeText={(text) => this.setState({text})}
+            onChangeText={(title) => this.setState({title})}
             style={journalStyles.text}
             placeholder="Title"
             returnKeyType= "done"
             autoCorrect={false}
             />
         </View>
-
+{/*This is where User writes in Content of their Dream*/}
         <View style={journalStyles.container}>
         <TextInput
-            onChangeText={(text) => this.setState({text})}
+            onChangeText={(content) => this.setState({content})}
             style={journalStyles.text}
             placeholder="Dream Content"
             returnKeyType= "done"
@@ -53,9 +76,9 @@ export default class JournalForm extends Component {
 
         <View>
             <Text style={journalStyles.text}>Type of Dream</Text>
-
+{/*This is where User selects in Dream Type*/}
             <Select
-                onSelect={this.onSelect}
+                onSelect={(dreamType) => this.setState({dreamType})}
                 defaultText ="Select type of dream..."
                 textStyle={journalStyles.text}
                 backdropStyle ={{backgroundColor : "#9cd19d"}}
@@ -68,24 +91,27 @@ export default class JournalForm extends Component {
                   <Option value="Recurring Dream">Recurring Dream</Option>
             </Select>
         </View>
-
+{/*This is where User selects in Sleep Start*/}
           <View>
             <Text style={journalStyles.text}>Sleep Start Time</Text>
-            <TimePicker />
+            <TimePickerStart handleTimeChange={this.handleTimeChange} timeStart={this.state.timeStart} />
          </View>
-
+{/*This is where User selects in Sleep End*/}
          <View>
             <Text style={journalStyles.text}>Sleep End Time</Text>
-            <TimePicker />
+            <TimePickerEnd handleTimeChange={this.handleTimeChange} timeEnd={this.state.timeEnd} />
          </View>
-
          <View>
             <Text style={journalStyles.text}>Make this public?</Text>
-            <Switch />
+            <Switch
+            onValueChange={(value) => this.setState({isPublic: value})}
+            style={{marginBottom: 10}}
+            value={this.state.isPublic} />
          </View>
 
+{/*This is where User selects their privacy option (default is false)*/}
         <View >
-            <Button small rounded success>
+            <Button small rounded success onPress={this.onJournalSave}>
                 <Icon name="checkmark" />
                 <Text style={journalStyles.saveButton}>Save</Text>
             </Button>

@@ -1,27 +1,44 @@
 import React, { Component } from 'react'
 import DatePicker from 'react-native-datepicker'
 
-export const TimePicker = class TimePicker extends Component {
-  constructor(props){
-    super(props)
-    this.state = {time:"12:00"}
-  }
+export const TimePickerStart = class TimePicker extends Component {
 
   render(){
     return (
       <DatePicker
           style={{width: 200}}
-          date={this.state.time}
+          date={this.props.timeStart}
           mode="time"
           format="HH:mm"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           minuteInterval={10}
-          onDateChange={(time) => {this.setState({time: time});}}
+          onDateChange={(time) => this.props.handleTimeChange(time, 'timeStart')}
         />
     )
   }
 }
+
+
+export const TimePickerEnd = class TimePicker extends Component {
+
+  render(){
+    return (
+      <DatePicker
+          style={{width: 200}}
+          date={this.props.timeEnd}
+          mode="time"
+          format="HH:mm"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          minuteInterval={10}
+          onDateChange={(time) => this.props.handleTimeChange(time, 'timeEnd')}
+        />
+    )
+  }
+}
+
+
 
 export const DatePick = class DatePick extends Component {
   constructor(props){
@@ -33,12 +50,10 @@ export const DatePick = class DatePick extends Component {
     return (
       <DatePicker
         style={{width: 200}}
-        date={this.state.date}
+        date={this.props.date}
         mode="date"
         placeholder="select date"
         format="YYYY-MM-DD"
-        minDate="2016-05-01"
-        maxDate="2016-06-01"
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
         customStyles={{
@@ -53,7 +68,7 @@ export const DatePick = class DatePick extends Component {
           }
           // ... You can check the source to find the other keys.
         }}
-        onDateChange={(date) => {this.setState({date: date})}}
+        onDateChange={(date) => this.props.handleTimeChange(date, 'date')}
       />
     )
   }

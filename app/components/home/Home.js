@@ -30,7 +30,7 @@ class Home extends Component {
       label: 'Home',
       // Note: By default the icon is only shown on iOS. Search the showIcon option below.
       icon: ({ tintColor }) => (
-        <Text>sgds</Text>
+        <Text>Home</Text>
       ),
     },
   }
