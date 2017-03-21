@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "test": "jest"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "react-native-floating-label-text-input": "^0.1.2",
     "react-native-keyboard-aware-scroll-view": "^0.2.7",
     "react-native-simple-store": "^1.1.0",
+    "react-native-push-notification": "^2.2.1",
     "react-native-spinkit": "^1.0.2",
     "react-native-svg": "^5.1.5",
     "react-native-swiper": "^1.5.4",
