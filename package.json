@@ -15,6 +15,8 @@
     "react-native": "0.42.0",
     "react-native-blur": "^2.0.0",
     "react-native-button-component": "^0.1.16",
+    "react-native-chooser": "^1.4.0",
+    "react-native-datepicker": "^1.4.5",
     "react-native-easy-grid": "^0.1.8",
     "react-native-floating-label-text-input": "^0.1.2",
     "react-native-keyboard-aware-scroll-view": "^0.2.7",

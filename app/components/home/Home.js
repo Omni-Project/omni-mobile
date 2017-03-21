@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native';
 import { Content, Button, Text, Icon, FooterTab } from 'native-base';
+import { TabNavigator } from 'react-navigation'
+
 import Foot from '../foot/Foot'
+import Login from '../login/Login'
 import JournalForm from '../journal/JournalForm'
+import Dreams from '../dreams/Dreams'
 import {loginStyles, loginFormStyles} from '../../assets/styles'
+
 import {logout} from '../../reducers/auth'
 import store from '../../store'
 
 
-export default class Home extends Component {
+
+
+class Home extends Component {
   constructor(){
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -17,7 +24,20 @@ export default class Home extends Component {
     //logging out
     store.dispatch(logout())
   }
+
+  static navigationOptions = {
+    tabBar: {
+      label: 'Home',
+      // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+      icon: ({ tintColor }) => (
+        <Text>sgds</Text>
+      ),
+    },
+  }
+
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
        <KeyboardAvoidingView behavior="padding" style={loginStyles.container}>
       {/*Make phone-related status bar light*/}
@@ -40,3 +60,20 @@ export default class Home extends Component {
     );
   }
 }
+
+
+export default MyApp = TabNavigator({
+  Home: {
+    screen: Home,
+  },
+  Dreams: {
+    screen: Dreams,
+  },
+  Logout: {
+    screen: Login
+  }
+}, {
+  tabBarOptions: {
+    activeTintColor: '#e91e63',
+  },
+});
