@@ -5,8 +5,15 @@ import {
   Text,
   View
 } from 'react-native';
+
+
+import styles from './app/assets/styles'
+import PushNotificationContainer from './app/components/pushNotifications/PushNotificationContainer'
+import Home from './app/components/home/Home';
 import Login from './app/components/login/Login'
 import {landingPageStyles} from './app/assets/styles'
+
+
 
 export default class DreamscapeMobile extends Component {
   render() {
@@ -18,5 +25,5 @@ export default class DreamscapeMobile extends Component {
   }
 }
 
-
 AppRegistry.registerComponent('DreamscapeMobile', () => DreamscapeMobile);
+
