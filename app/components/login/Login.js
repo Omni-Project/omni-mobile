@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView, Image } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, Image, StatusBar } from 'react-native';
 import { loginStyles } from '../../assets/styles';
 import LoginForm from './LoginForm';
 
@@ -7,6 +7,10 @@ export default class Login extends Component {
     render() {
         return (
       <KeyboardAvoidingView behavior="padding" style={loginStyles.container}>
+      {/*Make phone-related status bar light*/}
+        <StatusBar
+            barStyle='light-content'
+        />
         <View style={loginStyles.logoContainer}>
         {/*Temporary image to be replaced later*/}
             <Image
