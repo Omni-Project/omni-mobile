@@ -25,13 +25,13 @@ export default class Home extends Component {
             barStyle='light-content'
         />
         <View style={loginStyles.logoContainer}>
-            <Text style={loginStyles.title}>User is logged in</Text>
+            <Text>User is logged in</Text>
         </View>
         <View style={loginStyles.formContainer}>
          <View style={loginFormStyles.buttonContainer}>
           <View style={loginFormStyles.button}>
             <TouchableOpacity onPress={this.handleSubmit}>
-              <Text style={loginFormStyles.buttonTxt}>Log out</Text>
+              <Text>Log out</Text>
           </TouchableOpacity>
           </View>
         </View>
