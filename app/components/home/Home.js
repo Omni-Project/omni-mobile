@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, StatusBar, Image } from 'react-native';
 import { Content, Button, Text, Icon, FooterTab } from 'native-base';
 import { TabNavigator } from 'react-navigation'
 
@@ -30,7 +30,9 @@ class Home extends Component {
       label: 'Home',
       // Note: By default the icon is only shown on iOS. Search the showIcon option below.
       icon: ({ tintColor }) => (
-        <Text>sgds</Text>
+        <Image
+          source={require('./home.png')}
+        />
       ),
     },
   }
@@ -41,13 +43,13 @@ class Home extends Component {
     return (
        <KeyboardAvoidingView behavior="padding" style={loginStyles.container}>
       {/*Make phone-related status bar light*/}
-        <StatusBar
-            barStyle='light-content'
-        />
+        <StatusBar barStyle='light-content' />
+
         <View style={loginStyles.logoContainer}>
             <Text>User is logged in</Text>
         </View>
-        <View style={loginStyles.formContainer}>
+
+        <View>
          <View style={loginFormStyles.buttonContainer}>
           <View style={loginFormStyles.button}>
             <TouchableOpacity onPress={this.handleSubmit}>
@@ -74,6 +76,10 @@ export default MyApp = TabNavigator({
   }
 }, {
   tabBarOptions: {
-    activeTintColor: '#e91e63',
+    inactiveTintColor: 'white',
+    activeTintColor: '#BD95AF',
+    style: {
+      backgroundColor: 'black',
+    },
   },
 });

@@ -1,100 +1,136 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
-  Image,
   TextInput,
-  TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Switch
 } from 'react-native';
-import { Content, Card, CardItem, Left, Body, Button, Icon, Container } from 'native-base';
+import { Button, Icon } from 'native-base';
 import {Select, Option} from "react-native-chooser";
-import { journalStyles } from '../../assets/styles';
+import { journalStyles, loginFormStyles } from '../../assets/styles';
 import { TimePicker, DatePick } from '../pickers/Pickers'
-import Switch from '../switch/Switch'
+import store from '../../store'
+import { receiveJournalEntry } from '../../reducers/dreams'
 
 export default class JournalForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {text: ''}
+        this.state = {
+            title: '',
+            content: '',
+            dreamType: null,
+            date: '2017-04-01',
+            timeStart: '22:00',
+            timeEnd: '06:00',
+            isPublic: false
+    }
+    this.handleTimeChange = this.handleTimeChange.bind(this);
+    this.onJournalSave = this.onJournalSave.bind(this);
+    }
+    handleTimeChange(v, field) { this.setState({[field]: v}) }
+
+    onJournalSave() {
+        let journalData = Object.assign({}, this.state);
+        store.dispatch(receiveJournalEntry(journalData))
     }
 
     render() {
+
         return (
-      <KeyboardAvoidingView behavior="padding" >
-
-      <View>
-        <Text style={journalStyles.text}>Dream Date</Text>
-        <DatePick />
-      </View>
-
-      <View style={journalStyles.container}>
-        <TextInput
-            onChangeText={(text) => this.setState({text})}
-            style={journalStyles.text}
-            placeholder="Title"
-            returnKeyType= "done"
-            autoCorrect={false}
-            />
-        </View>
-
-        <View style={journalStyles.container}>
-        <TextInput
-            onChangeText={(text) => this.setState({text})}
-            style={journalStyles.text}
-            placeholder="Dream Content"
-            returnKeyType= "done"
-            autoCorrect={false}
-            />
-        </View>
+        <KeyboardAvoidingView behavior="padding" >
+        <View style={{flexGrow: 1, flexDirection: 'column',
+      justifyContent:'flex-start',  paddingLeft: '10%', paddingRight: '10%'}}>
 
 
-
-        <View>
-            <Text style={journalStyles.text}>Type of Dream</Text>
-
+        {/*Date of Dream && Type*/}
+        <View style={{flexDirection: 'row'}}>
+            <View style={journalStyles.items}>
+                <Text style={journalStyles.headingText}>Date</Text>
+                <DatePick handleTimeChange={this.handleTimeChange} date={this.state.date} />
+            </View>
+            <View style={journalStyles.items}>
+                <Text style={journalStyles.headingText}>Dream Type</Text>
             <Select
-                onSelect={this.onSelect}
-                defaultText ="Select type of dream..."
-                textStyle={journalStyles.text}
-                backdropStyle ={{backgroundColor : "#9cd19d"}}
-                optionListStyle={{backgroundColor : "#F5FCFF", height: 100}}
+                onSelect={(dreamType) => this.setState({dreamType})}
+                defaultText ="Select..."
+                animationType="slide"
+                style={journalStyles.typeInput}
+                textStyle={{color: 'white'}}
+                backdropStyle ={{backgroundColor : "#3a3a3a"}}
+                optionListStyle={{backgroundColor : "#3a3a3a", height: 190, borderColor: '#3a3a3a', borderRadius: 3}}
                 >
-                  <Option value="Daydream">Daydream</Option>
-                  <Option value="Lucid Dream">Lucid Dream</Option>
-                  <Option value="Nightmare">Nightmare</Option>
-                  <Option value="Normal Dream">Normal Dream</Option>
-                  <Option value="Recurring Dream">Recurring Dream</Option>
+                <Option value="Daydream" styleText={{color: 'white'}}>Daydream</Option>
+                <Option value="Lucid Dream" styleText={{color: 'white'}}>Lucid Dream</Option>
+                <Option value="Nightmare" styleText={{color: 'white'}}>Nightmare</Option>
+                <Option value="Normal Dream" styleText={{color: 'white'}}>Normal Dream</Option>
+                <Option value="Recurring Dream" styleText={{color: 'white'}}>Recurring Dream</Option>
             </Select>
+            </View>
         </View>
 
-          <View>
-            <Text style={journalStyles.text}>Sleep Start Time</Text>
-            <TimePicker />
-         </View>
+        {/*Title*/}
+        <View style={journalStyles.titleContainer}>
 
-         <View>
-            <Text style={journalStyles.text}>Sleep End Time</Text>
-            <TimePicker />
-         </View>
+            <TextInput
+                onChangeText={(title) => this.setState({title})}
+                style={journalStyles.titleInput}
+                placeholder="Title"
+                placeholderTextColor='#BD95AF'
+                returnKeyType= "done"
+                autoCorrect={false}
+                />
+        </View>
 
-         <View>
-            <Text style={journalStyles.text}>Make this public?</Text>
-            <Switch />
-         </View>
+        {/*Content*/}
+        <View style={journalStyles.contentContainer}>
+            <TextInput
+                onChangeText={(content) => this.setState({content})}
+                style={journalStyles.contentInput}
+                placeholder="Dream Content"
+                placeholderTextColor='#BD95AF'
+                returnKeyType= "done"
+                autoCorrect={false}
+                multiline = {true}
+                />
+        </View>
 
-        <View >
-            <Button small rounded success>
+        <View style={{flexDirection: 'row'}}>
+            {/*Sleep Start*/}
+            <View style={journalStyles.items}>
+                <Text style={journalStyles.headingText}>Sleep Start Time</Text>
+                <TimePicker handleTimeChange={this.handleTimeChange} time={this.state.timeStart} field="timeStart" />
+            </View>
+
+            {/*Sleep End*/}
+            <View style={journalStyles.items}>
+                <Text style={journalStyles.headingText}>Sleep End Time</Text>
+                <TimePicker handleTimeChange={this.handleTimeChange} time={this.state.timeEnd} field="timeEnd" />
+            </View>
+        </View>
+
+        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
+        {/*Make public?*/}
+            <Switch
+            onValueChange={(value) => this.setState({isPublic: value})}
+            style={{marginRight: 10}}
+            onTintColor='#BD95AF'
+            value={this.state.isPublic} />
+            <Text style={journalStyles.headingText}>Make this public?</Text>
+        </View>
+
+
+        <View style={journalStyles.saveButton}>
+            <Button onPress={this.onJournalSave} style={{ backgroundColor: '#BD95AF'}}>
                 <Icon name="checkmark" />
-                <Text style={journalStyles.saveButton}>Save</Text>
+                <Text style={loginFormStyles.buttonTxt}>Save</Text>
             </Button>
         </View>
+        </View>
 
-
-        </KeyboardAvoidingView>
-        );
-    }
+    </KeyboardAvoidingView>
+    );
+  }
 }
 
 
