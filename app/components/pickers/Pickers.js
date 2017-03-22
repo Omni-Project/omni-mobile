@@ -1,60 +1,36 @@
-import React, { Component } from 'react'
+import React from 'react'
 import DatePicker from 'react-native-datepicker'
+import { journalStyles } from '../../assets/styles';
 
-export const TimePicker = class TimePicker extends Component {
-  constructor(props){
-    super(props)
-    this.state = {time:"12:00"}
-  }
-
-  render(){
-    return (
-      <DatePicker
-          style={{width: 200}}
-          date={this.state.time}
-          mode="time"
-          format="HH:mm"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          minuteInterval={10}
-          onDateChange={(time) => {this.setState({time: time});}}
-        />
-    )
-  }
+export const TimePicker = function(props) {
+  return (
+    <DatePicker
+      style={{width: 154}}
+      customStyles={{dateText: journalStyles.dateText, dateInput: journalStyles.dateInput, dateIcon: journalStyles.dateIcon}}
+      date={props.time}
+      mode="time"
+      format="HH:mm"
+      confirmBtnText="Confirm"
+      cancelBtnText="Cancel"
+      minuteInterval={10}
+      onDateChange={(time) => props.handleTimeChange(time, props.field)}
+      />
+  )
 }
 
-export const DatePick = class DatePick extends Component {
-  constructor(props){
-    super(props)
-    this.state = {time:"12:00"}
-  }
+export const DatePick = function(props) {
 
-  render(){
     return (
       <DatePicker
-        style={{width: 200}}
-        date={this.state.date}
+        style={{width: 120}}
+        customStyles={{dateText: journalStyles.dateText, dateInput: journalStyles.dateInput, dateIcon: journalStyles.dateIcon}}
+        date={props.date}
         mode="date"
         placeholder="select date"
         format="YYYY-MM-DD"
-        minDate="2016-05-01"
-        maxDate="2016-06-01"
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
-        customStyles={{
-          dateIcon: {
-            position: 'absolute',
-            left: 0,
-            top: 4,
-            marginLeft: 0
-          },
-          dateInput: {
-            marginLeft: 36
-          }
-          // ... You can check the source to find the other keys.
-        }}
-        onDateChange={(date) => {this.setState({date: date})}}
+        onDateChange={(date) => props.handleTimeChange(date, 'date')}
       />
     )
-  }
 }
