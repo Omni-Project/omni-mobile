@@ -6,9 +6,9 @@ import {
   KeyboardAvoidingView,
   Switch
 } from 'react-native';
-import { Content, Card, CardItem, Left, Body, Button, Icon, Container } from 'native-base';
+import { Button, Icon } from 'native-base';
 import {Select, Option} from "react-native-chooser";
-import { journalStyles } from '../../assets/styles';
+import { journalStyles, loginFormStyles } from '../../assets/styles';
 import { TimePicker, DatePick } from '../pickers/Pickers'
 import store from '../../store'
 import { receiveJournalEntry } from '../../reducers/dreams'
@@ -36,82 +36,96 @@ export default class JournalForm extends Component {
     }
 
     render() {
+
         return (
         <KeyboardAvoidingView behavior="padding" >
+        <View style={{flexGrow: 1, flexDirection: 'column',
+      justifyContent:'flex-start',  paddingLeft: '10%', paddingRight: '10%'}}>
 
-        {/*Date of Dream*/}
-        <View>
-            <Text style={journalStyles.text}>Dream Date</Text>
-            <DatePick handleTimeChange={this.handleTimeChange} date={this.state.date} />
+
+        {/*Date of Dream && Type*/}
+        <View style={{flexDirection: 'row'}}>
+            <View style={journalStyles.items}>
+                <Text style={journalStyles.headingText}>Date</Text>
+                <DatePick handleTimeChange={this.handleTimeChange} date={this.state.date} />
+            </View>
+            <View style={journalStyles.items}>
+                <Text style={journalStyles.headingText}>Dream Type</Text>
+            <Select
+                onSelect={(dreamType) => this.setState({dreamType})}
+                defaultText ="Select..."
+                animationType="slide"
+                style={journalStyles.typeInput}
+                textStyle={{color: 'white'}}
+                backdropStyle ={{backgroundColor : "#3a3a3a"}}
+                optionListStyle={{backgroundColor : "#3a3a3a", height: 190, borderColor: '#3a3a3a', borderRadius: 3}}
+                >
+                <Option value="Daydream" styleText={{color: 'white'}}>Daydream</Option>
+                <Option value="Lucid Dream" styleText={{color: 'white'}}>Lucid Dream</Option>
+                <Option value="Nightmare" styleText={{color: 'white'}}>Nightmare</Option>
+                <Option value="Normal Dream" styleText={{color: 'white'}}>Normal Dream</Option>
+                <Option value="Recurring Dream" styleText={{color: 'white'}}>Recurring Dream</Option>
+            </Select>
+            </View>
         </View>
 
         {/*Title*/}
-        <View style={journalStyles.container}>
+        <View style={journalStyles.titleContainer}>
+
             <TextInput
                 onChangeText={(title) => this.setState({title})}
-                style={journalStyles.text}
+                style={journalStyles.titleInput}
                 placeholder="Title"
+                placeholderTextColor='#BD95AF'
                 returnKeyType= "done"
                 autoCorrect={false}
                 />
         </View>
 
         {/*Content*/}
-        <View style={journalStyles.container}>
+        <View style={journalStyles.contentContainer}>
             <TextInput
                 onChangeText={(content) => this.setState({content})}
-                style={journalStyles.text}
+                style={journalStyles.contentInput}
                 placeholder="Dream Content"
+                placeholderTextColor='#BD95AF'
                 returnKeyType= "done"
                 autoCorrect={false}
+                multiline = {true}
                 />
         </View>
 
+        <View style={{flexDirection: 'row'}}>
+            {/*Sleep Start*/}
+            <View style={journalStyles.items}>
+                <Text style={journalStyles.headingText}>Sleep Start Time</Text>
+                <TimePicker handleTimeChange={this.handleTimeChange} time={this.state.timeStart} field="timeStart" />
+            </View>
 
-        {/*Dream Type*/}
-        <View>
-            <Text style={journalStyles.text}>Type of Dream</Text>
-            <Select
-                onSelect={(dreamType) => this.setState({dreamType})}
-                defaultText ="Select type of dream..."
-                textStyle={journalStyles.text}
-                backdropStyle ={{backgroundColor : "#9cd19d"}}
-                optionListStyle={{backgroundColor : "#F5FCFF", height: 100}}
-                >
-                <Option value="Daydream">Daydream</Option>
-                <Option value="Lucid Dream">Lucid Dream</Option>
-                <Option value="Nightmare">Nightmare</Option>
-                <Option value="Normal Dream">Normal Dream</Option>
-                <Option value="Recurring Dream">Recurring Dream</Option>
-            </Select>
+            {/*Sleep End*/}
+            <View style={journalStyles.items}>
+                <Text style={journalStyles.headingText}>Sleep End Time</Text>
+                <TimePicker handleTimeChange={this.handleTimeChange} time={this.state.timeEnd} field="timeEnd" />
+            </View>
         </View>
 
-        {/*Sleep Start*/}
-        <View>
-            <Text style={journalStyles.text}>Sleep Start Time</Text>
-            <TimePicker handleTimeChange={this.handleTimeChange} time={this.state.timeStart} field="timeStart" />
-        </View>
-
-        {/*Sleep End*/}
-        <View>
-            <Text style={journalStyles.text}>Sleep End Time</Text>
-            <TimePicker handleTimeChange={this.handleTimeChange} time={this.state.timeEnd} field="timeEnd" />
-        </View>
-
+        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
         {/*Make public?*/}
-        <View>
-            <Text style={journalStyles.text}>Make this public?</Text>
             <Switch
             onValueChange={(value) => this.setState({isPublic: value})}
-            style={{marginBottom: 10}}
+            style={{marginRight: 10}}
+            onTintColor='#BD95AF'
             value={this.state.isPublic} />
+            <Text style={journalStyles.headingText}>Make this public?</Text>
         </View>
 
-        <View >
-            <Button small rounded success onPress={this.onJournalSave}>
+
+        <View style={journalStyles.saveButton}>
+            <Button onPress={this.onJournalSave} style={{ backgroundColor: '#BD95AF'}}>
                 <Icon name="checkmark" />
-                <Text style={journalStyles.saveButton}>Save</Text>
+                <Text style={loginFormStyles.buttonTxt}>Save</Text>
             </Button>
+        </View>
         </View>
 
     </KeyboardAvoidingView>

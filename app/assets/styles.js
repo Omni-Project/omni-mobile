@@ -55,7 +55,7 @@ export default StyleSheet.create({
 
 export const landingPageStyles = StyleSheet.create({
     appContainer: {
-        backgroundColor: '#242424',
+        backgroundColor: '#252525',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -64,31 +64,65 @@ export const landingPageStyles = StyleSheet.create({
 });
 
 export const journalStyles = StyleSheet.create({
-  container: {
-    backgroundColor: '#999'
+  items: {
+    marginBottom: 20
   },
-
-  text: {
+  titleContainer: {
+    marginBottom: 20,
+    backgroundColor: '#3a3a3a',
+    borderRadius: 3,
+    paddingLeft: 15,
+    height: 40
+  },
+  contentContainer: {
+    marginBottom: 20,
+    backgroundColor: '#3a3a3a',
+    borderRadius: 3,
+    padding: 15,
+    minHeight: 120
+  },
+  titleInput: {
       color: "white",
-      marginTop: 5,
+      height: 40,
+      fontSize: 15
+  },
+  contentInput: {
+      color: "white",
+      height: 120,
+      fontSize: 15
+  },
+  headingText: {
+      color: '#BD95AF',
       textAlign: 'left',
-      opacity: 0.9,
-      fontSize: 15,
-      height: 25,
-      width: '100%'
+      marginBottom: 8,
+      fontSize: 13
     },
-    buttons: {
-        flexDirection: 'row'
+    dateText: {
+      color: '#fff'
     },
-    editButton: {
-
+    dateInput: {
+      borderRadius: 3,
+      borderColor: "#3a3a3a",
+      borderWidth: 2
     },
-    tagButton: {
-        alignItems: 'flex-end'
+    typeInput: {
+      borderRadius: 3,
+      borderColor: "#3a3a3a",
+      borderWidth: 2,
+      width: 180,
+      height: 40
+    },
+    dateIcon: {
+      height: 0, width: 0
     },
     saveButton: {
-      color: 'white'
-    }
+      backgroundColor: '#BD95AF',
+      width: '100%',
+      borderRadius: 3,
+      marginTop: 10,
+      flexDirection: 'row',
+      justifyContent: 'center',
+  }
 });
 
 export const footerStyles = StyleSheet.create({
@@ -159,10 +193,13 @@ export const loginFormStyles = StyleSheet.create({
 
 export const homeStyles = StyleSheet.create({
   textContainer: {
-    padding: '10%'
+    padding: '10%',
+    paddingBottom: '7%'
   },
   text: {
-    color: '#fff'
+    color: '#b4d4ee',
+    fontSize: 25,
+    fontWeight: 'bold'
   }
 
 })
