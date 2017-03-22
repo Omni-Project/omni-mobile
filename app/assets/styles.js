@@ -203,3 +203,38 @@ export const homeStyles = StyleSheet.create({
   }
 
 })
+
+export const listViewStyles = StyleSheet.create({
+     dateText: {
+      color: '#9c9a9a',
+      fontSize: 10,
+      fontWeight: 'bold'
+    },   
+    titleText: {
+      color: '#BD95AF',
+      fontSize: 17,
+      fontWeight: 'bold'
+    },
+    contentText: {
+      color: 'white',
+      fontSize: 13,
+      fontWeight: 'bold'
+    },
+    dreamTypeText: {
+      color: '#9c9a9a',
+      fontSize: 13,
+      fontStyle: 'italic'
+    },
+    list: {
+      justifyContent: 'center',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    },
+    item: {
+      backgroundColor: '#3A3A3A',
+      margin: 5,
+      width: 150,
+      height: 200,
+      borderRadius: 10
+    }
+});
