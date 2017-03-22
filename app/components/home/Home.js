@@ -41,12 +41,12 @@ class Home extends Component {
     return (
        <KeyboardAvoidingView behavior="padding" style={loginStyles.container}>
       {/*Make phone-related status bar light*/}
-        <StatusBar
-            barStyle='light-content'
-        />
+        <StatusBar barStyle='light-content' />
+
         <View style={loginStyles.logoContainer}>
             <Text>User is logged in</Text>
         </View>
+
         <View style={loginStyles.formContainer}>
          <View style={loginFormStyles.buttonContainer}>
           <View style={loginFormStyles.button}>

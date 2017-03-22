@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
-  Image,
   TextInput,
-  TouchableOpacity,
   KeyboardAvoidingView,
   Switch
 } from 'react-native';
 import { Content, Card, CardItem, Left, Body, Button, Icon, Container } from 'native-base';
 import {Select, Option} from "react-native-chooser";
 import { journalStyles } from '../../assets/styles';
-import { TimePickerEnd, TimePickerStart, DatePick } from '../pickers/Pickers'
+import { TimePicker, DatePick } from '../pickers/Pickers'
 import store from '../../store'
 import { receiveJournalEntry } from '../../reducers/dreams'
 
@@ -23,60 +20,57 @@ export default class JournalForm extends Component {
             title: '',
             content: '',
             dreamType: null,
-            date: null,
-            timeStart: null,
-            timeEnd: null,
+            date: '2017-04-01',
+            timeStart: '22:00',
+            timeEnd: '06:00',
             isPublic: false
     }
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.onJournalSave = this.onJournalSave.bind(this);
-}
-  handleTimeChange (v, field) {
-    this.setState({[field]: v})
-    console.log(field, v);
-  }
+    }
+    handleTimeChange(v, field) { this.setState({[field]: v}) }
 
-  onJournalSave() {
-    let journalData = Object.assign({}, this.state);
-    // console.log('journalData', journalData);
-    // this.props.onJournalSave(journalData);
-    store.dispatch(receiveJournalEntry(journalData))
-}
+    onJournalSave() {
+        let journalData = Object.assign({}, this.state);
+        store.dispatch(receiveJournalEntry(journalData))
+    }
 
     render() {
         return (
-      <KeyboardAvoidingView behavior="padding" >
-{/*This is where User selects in Date of Dream*/}
-      <View>
-        <Text style={journalStyles.text}>Dream Date</Text>
-        <DatePick handleTimeChange={this.handleTimeChange} date={this.state.date} />
-      </View>
-{/*This is where User writes in Title of their Dream*/}
-      <View style={journalStyles.container}>
-        <TextInput
-            onChangeText={(title) => this.setState({title})}
-            style={journalStyles.text}
-            placeholder="Title"
-            returnKeyType= "done"
-            autoCorrect={false}
-            />
+        <KeyboardAvoidingView behavior="padding" >
+
+        {/*Date of Dream*/}
+        <View>
+            <Text style={journalStyles.text}>Dream Date</Text>
+            <DatePick handleTimeChange={this.handleTimeChange} date={this.state.date} />
         </View>
-{/*This is where User writes in Content of their Dream*/}
+
+        {/*Title*/}
         <View style={journalStyles.container}>
-        <TextInput
-            onChangeText={(content) => this.setState({content})}
-            style={journalStyles.text}
-            placeholder="Dream Content"
-            returnKeyType= "done"
-            autoCorrect={false}
-            />
+            <TextInput
+                onChangeText={(title) => this.setState({title})}
+                style={journalStyles.text}
+                placeholder="Title"
+                returnKeyType= "done"
+                autoCorrect={false}
+                />
+        </View>
+
+        {/*Content*/}
+        <View style={journalStyles.container}>
+            <TextInput
+                onChangeText={(content) => this.setState({content})}
+                style={journalStyles.text}
+                placeholder="Dream Content"
+                returnKeyType= "done"
+                autoCorrect={false}
+                />
         </View>
 
 
-
+        {/*Dream Type*/}
         <View>
             <Text style={journalStyles.text}>Type of Dream</Text>
-{/*This is where User selects in Dream Type*/}
             <Select
                 onSelect={(dreamType) => this.setState({dreamType})}
                 defaultText ="Select type of dream..."
@@ -84,32 +78,35 @@ export default class JournalForm extends Component {
                 backdropStyle ={{backgroundColor : "#9cd19d"}}
                 optionListStyle={{backgroundColor : "#F5FCFF", height: 100}}
                 >
-                  <Option value="Daydream">Daydream</Option>
-                  <Option value="Lucid Dream">Lucid Dream</Option>
-                  <Option value="Nightmare">Nightmare</Option>
-                  <Option value="Normal Dream">Normal Dream</Option>
-                  <Option value="Recurring Dream">Recurring Dream</Option>
+                <Option value="Daydream">Daydream</Option>
+                <Option value="Lucid Dream">Lucid Dream</Option>
+                <Option value="Nightmare">Nightmare</Option>
+                <Option value="Normal Dream">Normal Dream</Option>
+                <Option value="Recurring Dream">Recurring Dream</Option>
             </Select>
         </View>
-{/*This is where User selects in Sleep Start*/}
-          <View>
+
+        {/*Sleep Start*/}
+        <View>
             <Text style={journalStyles.text}>Sleep Start Time</Text>
-            <TimePickerStart handleTimeChange={this.handleTimeChange} timeStart={this.state.timeStart} />
-         </View>
-{/*This is where User selects in Sleep End*/}
-         <View>
+            <TimePicker handleTimeChange={this.handleTimeChange} time={this.state.timeStart} field="timeStart" />
+        </View>
+
+        {/*Sleep End*/}
+        <View>
             <Text style={journalStyles.text}>Sleep End Time</Text>
-            <TimePickerEnd handleTimeChange={this.handleTimeChange} timeEnd={this.state.timeEnd} />
-         </View>
-         <View>
+            <TimePicker handleTimeChange={this.handleTimeChange} time={this.state.timeEnd} field="timeEnd" />
+        </View>
+
+        {/*Make public?*/}
+        <View>
             <Text style={journalStyles.text}>Make this public?</Text>
             <Switch
             onValueChange={(value) => this.setState({isPublic: value})}
             style={{marginBottom: 10}}
             value={this.state.isPublic} />
-         </View>
+        </View>
 
-{/*This is where User selects their privacy option (default is false)*/}
         <View >
             <Button small rounded success onPress={this.onJournalSave}>
                 <Icon name="checkmark" />
@@ -117,10 +114,9 @@ export default class JournalForm extends Component {
             </Button>
         </View>
 
-
-        </KeyboardAvoidingView>
-        );
-    }
+    </KeyboardAvoidingView>
+    );
+  }
 }
 
 

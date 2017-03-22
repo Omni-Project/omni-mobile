@@ -1,56 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
 import DatePicker from 'react-native-datepicker'
 
-export const TimePickerStart = class TimePicker extends Component {
-
-  render(){
-    return (
-      <DatePicker
-          style={{width: 200}}
-          date={this.props.timeStart}
-          mode="time"
-          format="HH:mm"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          minuteInterval={10}
-          onDateChange={(time) => this.props.handleTimeChange(time, 'timeStart')}
-        />
-    )
-  }
+export const TimePicker = function(props) {
+  return (
+    <DatePicker
+      style={{width: 200}}
+      date={props.time}
+      mode="time"
+      format="HH:mm"
+      confirmBtnText="Confirm"
+      cancelBtnText="Cancel"
+      minuteInterval={10}
+      onDateChange={(time) => props.handleTimeChange(time, props.field)}
+      />
+  )
 }
 
+export const DatePick = function(props) {
 
-export const TimePickerEnd = class TimePicker extends Component {
-
-  render(){
-    return (
-      <DatePicker
-          style={{width: 200}}
-          date={this.props.timeEnd}
-          mode="time"
-          format="HH:mm"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          minuteInterval={10}
-          onDateChange={(time) => this.props.handleTimeChange(time, 'timeEnd')}
-        />
-    )
-  }
-}
-
-
-
-export const DatePick = class DatePick extends Component {
-  constructor(props){
-    super(props)
-    this.state = {time:"12:00"}
-  }
-
-  render(){
     return (
       <DatePicker
         style={{width: 200}}
-        date={this.props.date}
+        date={props.date}
         mode="date"
         placeholder="select date"
         format="YYYY-MM-DD"
@@ -68,8 +39,7 @@ export const DatePick = class DatePick extends Component {
           }
           // ... You can check the source to find the other keys.
         }}
-        onDateChange={(date) => this.props.handleTimeChange(date, 'date')}
+        onDateChange={(date) => props.handleTimeChange(date, 'date')}
       />
     )
-  }
 }
