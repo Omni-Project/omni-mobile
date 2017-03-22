@@ -6,7 +6,8 @@ import { TabNavigator } from 'react-navigation'
 import Foot from '../foot/Foot'
 import Login from '../login/Login'
 import JournalForm from '../journal/JournalForm'
-import Dreams from '../dreams/Dreams'
+import AddDreams from '../dreams/AddDreams'
+import AllDreams from '../dreams/AllDreams'
 import {loginStyles, loginFormStyles} from '../../assets/styles'
 
 import {logout} from '../../reducers/auth'
@@ -69,7 +70,10 @@ export default MyApp = TabNavigator({
     screen: Home,
   },
   Dreams: {
-    screen: Dreams,
+    screen: AllDreams,
+  },
+  AddDreams: {
+    screen: AddDreams,
   },
   Logout: {
     screen: Login
@@ -77,7 +81,7 @@ export default MyApp = TabNavigator({
 }, {
   tabBarOptions: {
     inactiveTintColor: 'white',
-    activeTintColor: '#BD95AF',
+    activeTintColor: '#eda6e8',
     style: {
       backgroundColor: 'black',
     },

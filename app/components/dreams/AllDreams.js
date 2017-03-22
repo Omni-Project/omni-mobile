@@ -18,12 +18,12 @@ export default class Dreams extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding">
-      {/*Make phone-related status bar light*/}
+
         <StatusBar barStyle='light-content' />
         <View style={homeStyles.textContainer}>
-          <Text style={homeStyles.text}>Add a Dream</Text>
+          <Text style={homeStyles.text}>Dreams</Text>
         </View>
-        <JournalForm  />
+
 
       </KeyboardAvoidingView>
     )
