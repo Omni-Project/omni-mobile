@@ -42,7 +42,6 @@ export default class LoginForm extends Component {
     } else {
       store.dispatch(login(email, password))
     }
-    console.log('user', store.getState().auth)
   }
 
   render() {

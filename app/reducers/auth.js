@@ -41,11 +41,11 @@ export const getUser = () =>
 export const login = (username, password) =>
   dispatch =>
   //hard coding to local host for now, will switch to heroku url
-    axios.post('http://localhost:1337/api/auth/login/local',
+    axios.post('http://localhost:1337/api/auth/login/mobile',
       {username, password})
-      .then(() => axios.get('http://localhost:1337/api/auth/whoami'))
       .then(res => res.data)
       .then(user => {
+        console.log('MOBILE APP GOT DIS:', user)
         const savedUser = {
           name: user.name,
           email: user.email,
