@@ -47,8 +47,12 @@ export const getUser = () =>
           .then(res => {
             console.log('result of call', res.data)
             const data = res.data
-            //if(!data.success) //PUSH TO LOGIN SCREEN
-            dispatch(setUser(data.user))
+            if(!data.success) {
+              dispatch(removeUser())
+            } else {
+              dispatch(setUser(data.user))
+            }
+
           })
         }
       })
