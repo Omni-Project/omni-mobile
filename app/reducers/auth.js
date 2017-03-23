@@ -1,6 +1,7 @@
 import axios from 'axios'
 import localPhoneStorage from 'react-native-simple-store'
 import store from '../store'
+import { receiveAllDreams } from './dreams'
 //CONSTANTS
 const SET_USER = 'SET_USER'
 const REMOVE_USER = 'REMOVE_USER'
@@ -48,9 +49,14 @@ export const getUser = () =>
             console.log('result of call', res.data)
             const data = res.data
             if(!data.success) {
-              dispatch(removeUser())
+              localPhoneStorage.delete('token')
+                .then(() => {
+                  dispatch(removeUser())
+                })
+                .catch(console.error)
             } else {
               dispatch(setUser(data.user))
+              dispatch(receiveAllDreams(data.user.id,token))
             }
 
           })
