@@ -105,6 +105,9 @@ export const journalStyles = StyleSheet.create({
       borderColor: "#3a3a3a",
       borderWidth: 2
     },
+    datePicker: {
+      backgroundColor: '#c0b4ca'
+    },
     typeInput: {
       borderRadius: 3,
       borderColor: "#3a3a3a",
@@ -209,7 +212,7 @@ export const listViewStyles = StyleSheet.create({
       color: '#9c9a9a',
       fontSize: 10,
       fontWeight: 'bold'
-    },   
+    },
     titleText: {
       color: '#BD95AF',
       fontSize: 17,
