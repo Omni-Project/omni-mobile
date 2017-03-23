@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, StatusBar, Image } from 'react-native';
 import { Content, Button, Text, Icon, FooterTab } from 'native-base';
 import { TabNavigator } from 'react-navigation'
-
-import Foot from '../foot/Foot'
 import Login from '../login/Login'
 import JournalForm from '../journal/JournalForm'
 import Settings from '../settings/Settings'

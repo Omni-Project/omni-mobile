@@ -3,6 +3,7 @@ import localPhoneStorage from 'react-native-simple-store'
 
 //CONSTANTS
 const RECEIVE_JOURNAL_ENTRY = 'RECEIVE_JOURNAL_ENTRY'
+const LOAD_ALL_DREAMS = 'LOAD_ALL_DREAMS'
 
 //REDUCER
 const reducer = (state=null, action) => {
@@ -11,9 +12,14 @@ const reducer = (state=null, action) => {
   case RECEIVE_JOURNAL_ENTRY:
     return action.user
 
+  case LOAD_ALL_DREAMS:
+    return action.user
+
   }
   return state
 }
+
+
 
 //ACTION CREATORS
 export const receiveJournalEntry = (state) =>
@@ -27,5 +33,22 @@ export const receiveJournalEntry = (state) =>
       // .then(() => dispatch(whoami()))
       // .catch(() => dispatch(whoami()))
   }
+
+export const loadAllDreams = dreams => {
+	return {
+		type: LOAD_ALL_DREAMS,
+		dreams
+	};
+};
+
+export const receiveAllDreams = () => {
+	dispatch => {
+		axios.get('http://localhost:1337/api/dreams')
+			.then((dreams) => {
+        dispatch(loadAllDreams(dreams))
+      }) 
+      .catch(console.error);
+	}
+}
 
 export default reducer
