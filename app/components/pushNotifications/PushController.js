@@ -6,7 +6,6 @@ export default class PushController extends Component {
     PushNotification.configure({
       // (required) Called when a remote or local notification is opened or received
       onNotification: function(notification) {
-          console.log( 'NOTIFICATION:', notification );
           //to fill out later - what do we want to happen when user actually clicks on the notification
       }
     })

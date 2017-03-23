@@ -38,7 +38,6 @@ export const getUser = () =>
   dispatch =>
     localPhoneStorage.get('token')
       .then(token => {
-        console.log('token is', token)
         //if no token is saved
         if(!token) {
           dispatch(setUser(null))
@@ -46,7 +45,6 @@ export const getUser = () =>
         //otherwise check validity of token
         return axios.get(`http://localhost:1337/api/auth/verify?token=${token}`)
           .then(res => {
-            console.log('result of call', res.data)
             const data = res.data
             if(!data.success) {
               localPhoneStorage.delete('token')

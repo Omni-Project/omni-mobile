@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, KeyboardAvoidingView, StatusBar, Image } from 'react-native';
 import { homeStyles } from '../../assets/styles';
 import JournalForm from '../journal/JournalForm';
+import store from '../../store';
 
 export default class Dreams extends React.Component {
   static navigationOptions = {
@@ -15,6 +16,7 @@ export default class Dreams extends React.Component {
       // ),
     },
   }
+    
   render() {
     return (
       <KeyboardAvoidingView behavior="padding">
@@ -23,8 +25,7 @@ export default class Dreams extends React.Component {
         <View style={homeStyles.textContainer}>
           <Text style={homeStyles.text}>Add a Dream</Text>
         </View>
-        <JournalForm  />
-
+        <JournalForm />
       </KeyboardAvoidingView>
     )
   }

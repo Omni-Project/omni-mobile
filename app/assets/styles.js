@@ -201,21 +201,21 @@ export const homeStyles = StyleSheet.create({
   },
   text: {
     color: '#b4d4ee',
-    fontSize: 25,
+    fontSize: 35,
     fontWeight: 'bold'
   }
 
 })
 
 export const listViewStyles = StyleSheet.create({
-     dateText: {
+    dateText: {
       color: '#9c9a9a',
-      fontSize: 10,
+      fontSize: 20,
       fontWeight: 'bold'
     },
     titleText: {
       color: '#BD95AF',
-      fontSize: 17,
+      fontSize: 27,
       fontWeight: 'bold'
     },
     contentText: {
@@ -225,7 +225,7 @@ export const listViewStyles = StyleSheet.create({
     },
     dreamTypeText: {
       color: '#9c9a9a',
-      fontSize: 13,
+      fontSize: 20,
       fontStyle: 'italic'
     },
     list: {
@@ -236,8 +236,61 @@ export const listViewStyles = StyleSheet.create({
     item: {
       backgroundColor: '#3A3A3A',
       margin: 5,
-      width: 150,
-      height: 200,
-      borderRadius: 10
+      justifyContent: 'space-around',
+      padding: 15,
+      width: 300,
+      height: 150
     }
+});
+
+
+
+export const modalStyles = StyleSheet.create({
+  item: {
+    backgroundColor: '#3A3A3A',
+    margin: 10,
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  modal1: {
+    flex:1,
+    backgroundColor: "#3A3A3A"
+  },
+  btn: {
+    margin: 10,
+    color: "white",
+    padding: 10,
+    fontSize: 20
+  },
+  dateText: {
+      color: '#9c9a9a',
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginTop: 40,
+      marginBottom: 20
+    },
+    titleText: {
+      color: '#BD95AF',
+      fontSize: 40,
+      fontWeight: 'bold',
+      marginBottom: 20
+    },
+    contentText: {
+      color: 'white',
+      fontSize: 25,
+      marginBottom: 20
+    },
+    dreamTypeText: {
+      color: '#9c9a9a',
+      fontSize: 18,
+      fontStyle: 'italic'
+    }
+
 });
