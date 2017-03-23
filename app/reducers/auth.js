@@ -1,6 +1,6 @@
 import axios from 'axios'
 import localPhoneStorage from 'react-native-simple-store'
-
+import store from '../store'
 //CONSTANTS
 const SET_USER = 'SET_USER'
 const REMOVE_USER = 'REMOVE_USER'
@@ -35,33 +35,45 @@ export const removeUser = () => {
 
 export const getUser = () =>
   dispatch =>
-    localPhoneStorage.get('user')
-      .then(user => dispatch(setUser(user)))
+    localPhoneStorage.get('token')
+      .then(token => {
+        console.log('token is', token)
+        //if no token is saved
+        if(!token) {
+          dispatch(setUser(null))
+        } else {
+        //otherwise check validity of token
+        return axios.get(`http://localhost:1337/api/auth/verify?token=${token}`)
+          .then(res => {
+            console.log('result of call', res.data)
+            const data = res.data
+            if(!data.success) {
+              dispatch(removeUser())
+            } else {
+              dispatch(setUser(data.user))
+            }
+
+          })
+        }
+      })
+      .catch(console.error)
 
 export const login = (username, password) =>
   dispatch =>
   //hard coding to local host for now, will switch to heroku url
-    axios.post('http://localhost:1337/api/auth/login/local',
+    axios.post('http://localhost:1337/api/auth/login/mobile',
       {username, password})
-      .then(() => axios.get('http://localhost:1337/api/auth/whoami'))
       .then(res => res.data)
-      .then(user => {
-        const savedUser = {
-          name: user.name,
-          email: user.email,
-          id: user.id,
-          photoUrl: user.photoUrl,
-          sleepDebt: user.sleepDebt,
-          averageSleep: user.averageSleep
-        }
-        return localPhoneStorage.save('user', savedUser)
+      .then(token => {
+        //token being saved
+        return localPhoneStorage.save('token', token)
        })
       .then(() => dispatch(getUser()))
       .catch(console.error)
 
 export const logout = () =>
   dispatch =>
-    localPhoneStorage.delete('user')
+    localPhoneStorage.delete('token')
       .then(() => dispatch(removeUser()))
 
 export default reducer
