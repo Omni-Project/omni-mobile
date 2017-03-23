@@ -20,7 +20,7 @@ export default class JournalForm extends Component {
             title: '',
             content: '',
             dreamType: null,
-            date: '2017-04-01',
+            date: new Date(),
             timeStart: '22:00',
             timeEnd: '06:00',
             isPublic: false
@@ -57,14 +57,13 @@ export default class JournalForm extends Component {
                 animationType="slide"
                 style={journalStyles.typeInput}
                 textStyle={{color: 'white'}}
-                backdropStyle ={{backgroundColor : "#3a3a3a"}}
-                optionListStyle={{backgroundColor : "#3a3a3a", height: 190, borderColor: '#3a3a3a', borderRadius: 3}}
+                backdropStyle ={journalStyles.datePicker}
+                optionListStyle={{backgroundColor: "#c0b4ca", height: 190, borderColor: '#c0b4ca', borderRadius: 3}}
                 >
-                <Option value="Daydream" styleText={{color: 'white'}}>Daydream</Option>
-                <Option value="Lucid Dream" styleText={{color: 'white'}}>Lucid Dream</Option>
-                <Option value="Nightmare" styleText={{color: 'white'}}>Nightmare</Option>
-                <Option value="Normal Dream" styleText={{color: 'white'}}>Normal Dream</Option>
-                <Option value="Recurring Dream" styleText={{color: 'white'}}>Recurring Dream</Option>
+                {['Daydream', 'Lucid Dream', 'Nightmare', 'Normal Dream', 'Recurring Dream'].map((type, i) =>
+                   <Option value={type} styleText={{color: '#252525'}} key={i}>{type}</Option>
+                )}
+
             </Select>
             </View>
         </View>
