@@ -35,8 +35,24 @@ export const removeUser = () => {
 
 export const getUser = () =>
   dispatch =>
-    localPhoneStorage.get('user')
-      .then(user => dispatch(setUser(user)))
+    localPhoneStorage.get('token')
+      .then(token => {
+        console.log('token is', token)
+        //if no token is saved
+        if(!token) {
+          dispatch(setUser(null))
+        } else {
+        //otherwise check validity of token
+        return axios.get(`http://localhost:1337/api/auth/verify?token=${token}`)
+          .then(res => {
+            console.log('result of call', res.data)
+            const data = res.data
+            if(!data.success) //PUSH TO LOGIN SCREEN
+            dispatch(setUser(data.user))
+          })
+        }
+      })
+      .catch(console.error)
 
 export const login = (username, password) =>
   dispatch =>
@@ -44,17 +60,9 @@ export const login = (username, password) =>
     axios.post('http://localhost:1337/api/auth/login/mobile',
       {username, password})
       .then(res => res.data)
-      .then(user => {
-        console.log('MOBILE APP GOT DIS:', user)
-        const savedUser = {
-          name: user.name,
-          email: user.email,
-          id: user.id,
-          photoUrl: user.photoUrl,
-          sleepDebt: user.sleepDebt,
-          averageSleep: user.averageSleep
-        }
-        return localPhoneStorage.save('user', savedUser)
+      .then(token => {
+        //token being saved
+        return localPhoneStorage.save('token', token)
        })
       .then(() => dispatch(getUser()))
       .catch(console.error)
