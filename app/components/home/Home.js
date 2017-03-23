@@ -6,6 +6,7 @@ import { TabNavigator } from 'react-navigation'
 import Foot from '../foot/Foot'
 import Login from '../login/Login'
 import JournalForm from '../journal/JournalForm'
+import Settings from '../settings/Settings'
 import AddDreams from '../dreams/AddDreams'
 import AllDreams from '../dreams/AllDreams'
 import {loginStyles, loginFormStyles} from '../../assets/styles'
@@ -47,18 +48,9 @@ class Home extends Component {
         <StatusBar barStyle='light-content' />
 
         <View style={loginStyles.logoContainer}>
-            <Text>User is logged in</Text>
+            <Text>Home!!!</Text>
         </View>
 
-        <View>
-         <View style={loginFormStyles.buttonContainer}>
-          <View style={loginFormStyles.button}>
-            <TouchableOpacity onPress={this.handleSubmit}>
-              <Text>Log out</Text>
-          </TouchableOpacity>
-          </View>
-        </View>
-        </View>
       </KeyboardAvoidingView>
     );
   }
@@ -75,8 +67,8 @@ export default MyApp = TabNavigator({
   AddDreams: {
     screen: AddDreams,
   },
-  Logout: {
-    screen: Login
+  Settings: {
+    screen: Settings
   }
 }, {
   tabBarOptions: {

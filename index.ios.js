@@ -14,24 +14,23 @@ import store from './app/store'
 export default class DreamscapeMobile extends Component {
   constructor(){
     super()
-    this.state = store.getState().auth
+    this.state = {user: store.getState().auth}
   }
   componentDidMount(){
     //setting this up so it updates when user is set and re-renders proper view
     this.unsubscribe = store.subscribe(()=>{
-      this.setState(store.getState().auth)
+      const newState = store.getState().auth
+      this.setState({user: newState})
     })
   }
   componentWillUnmount(){
     this.unsubscribe()
   }
 
-
   render() {
-
     return (
       <View style={landingPageStyles.appContainer}>
-        { this.state ? <Home /> : <Login /> }
+        { this.state.user ? <Home /> : <Login /> }
       </View>
     )
   }

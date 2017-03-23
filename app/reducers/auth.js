@@ -1,6 +1,6 @@
 import axios from 'axios'
 import localPhoneStorage from 'react-native-simple-store'
-
+import store from '../store'
 //CONSTANTS
 const SET_USER = 'SET_USER'
 const REMOVE_USER = 'REMOVE_USER'
@@ -47,7 +47,7 @@ export const getUser = () =>
           .then(res => {
             console.log('result of call', res.data)
             const data = res.data
-            if(!data.success) //PUSH TO LOGIN SCREEN
+            //if(!data.success) //PUSH TO LOGIN SCREEN
             dispatch(setUser(data.user))
           })
         }
@@ -69,7 +69,7 @@ export const login = (username, password) =>
 
 export const logout = () =>
   dispatch =>
-    localPhoneStorage.delete('user')
+    localPhoneStorage.delete('token')
       .then(() => dispatch(removeUser()))
 
 export default reducer
