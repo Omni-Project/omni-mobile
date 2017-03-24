@@ -73,7 +73,6 @@ export default class PushNotificationsContainer extends Component {
     const typeOptions=['AM','PM']
     const hourOptions = this.makeHours()
     const minOptions = this.makeMins()
-    console.log(this.state)
     return(
       <View style={styles.backgroundView}>
         <View style={styles.pushNotificationsView}>

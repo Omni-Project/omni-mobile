@@ -4,7 +4,8 @@ import {
   View,
   TextInput,
   KeyboardAvoidingView,
-  Switch
+  Switch,
+  AlertIOS
 } from 'react-native';
 import { Button, Icon } from 'native-base';
 import {Select, Option} from "react-native-chooser";
@@ -13,18 +14,22 @@ import { TimePicker, DatePick } from '../pickers/Pickers'
 import store from '../../store'
 import { receiveJournalEntry } from '../../reducers/dreams'
 
+
+const initialState = {
+        title: '',
+        content: '',
+        dreamType: null,
+        date: new Date(),
+        timeStart: '22:00',
+        timeEnd: '06:00',
+        isPublic: false,
+        user_id: 0
+}
+    
 export default class JournalForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            title: '',
-            content: '',
-            dreamType: null,
-            date: new Date(),
-            timeStart: '22:00',
-            timeEnd: '06:00',
-            isPublic: false
-    }
+        this.state = initialState
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.onJournalSave = this.onJournalSave.bind(this);
     }
@@ -33,10 +38,25 @@ export default class JournalForm extends Component {
     onJournalSave() {
         let journalData = Object.assign({}, this.state);
         store.dispatch(receiveJournalEntry(journalData))
+        AlertIOS.alert(
+            `${this.state.title}`,
+            'Your dream has been saved!'
+        )
+        this.setState(initialState);
     }
 
-    render() {
+    componentDidMount () {
+        this.unsubscribe = store.subscribe(() => this.setState({user_id: store.getState().auth.id}));
+    }
 
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
+
+    
+
+    render() {
+ 
         return (
         <KeyboardAvoidingView behavior="padding" >
         <View style={{flexGrow: 1, flexDirection: 'column',

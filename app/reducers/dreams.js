@@ -4,6 +4,7 @@ import localPhoneStorage from 'react-native-simple-store'
 //CONSTANTS
 const RECEIVE_JOURNAL_ENTRY = 'RECEIVE_JOURNAL_ENTRY'
 const LOAD_ALL_DREAMS = 'LOAD_ALL_DREAMS'
+const RECEIVE_DREAM = 'RECEIVE_DREAM'
 
 const initialState = {
   list: [],
@@ -21,7 +22,10 @@ const reducer = (state=initialState, action) => {
   case LOAD_ALL_DREAMS:
     newState.list = action.dreams
     return newState
-
+  
+  case RECEIVE_DREAM:
+    newState.list = [...newState.list, action.dream]
+    return newState
   }
   return state
 }
@@ -29,16 +33,21 @@ const reducer = (state=initialState, action) => {
 
 
 //ACTION CREATORS
+export const receiveDream = (dream) => ({
+  type: RECEIVE_DREAM, dream
+})
+
+
 export const receiveJournalEntry = (state) =>
   dispatch => {
-    const { title, content, timeStart, timeEnd, dreamType, isPublic, date } = state
+    const { title, content, timeStart, timeEnd, dreamType, isPublic, date, user_id } = state
     const sleepStartHour = +timeStart.slice(0,2)
     const sleepStartMinute = +timeStart.slice(3)
     const sleepEndHour = +timeEnd.slice(0,2)
     const sleepEndMinute = +timeEnd.slice(3)
-    axios.post('http://localhost:1337/api/dreams', {title, content, sleepStartHour, sleepStartMinute, sleepEndHour, sleepEndMinute, dreamType, isPublic, date})
-      // .then(() => dispatch(whoami()))
-      // .catch(() => dispatch(whoami()))
+    axios.post(`http://localhost:1337/api/dreams/user/${user_id}`, {title, content, sleepStartHour, sleepStartMinute, sleepEndHour, sleepEndMinute, dreamType, isPublic, date, user_id})
+    .then(res => res.data)
+    .then(dream => dispatch(receiveDream(dream)))
   }
 
 export const loadAllDreams = dreams => {
