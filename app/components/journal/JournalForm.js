@@ -25,11 +25,11 @@ const initialState = {
         isPublic: false,
         user_id: 0
 }
-    
+
 export default class JournalForm extends Component {
     constructor(props) {
         super(props);
-        this.state = initialState
+        this.state = Object.assign({}, initialState)
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.onJournalSave = this.onJournalSave.bind(this);
     }
@@ -42,7 +42,8 @@ export default class JournalForm extends Component {
             `${this.state.title}`,
             'Your dream has been saved!'
         )
-        this.setState(initialState);
+        this.setState(Object.assign({}, initialState));
+        this.dreamTypeSelect.setSelectedText("Select..")
     }
 
     componentDidMount () {
@@ -53,10 +54,10 @@ export default class JournalForm extends Component {
         this.unsubscribe();
     }
 
-    
+
 
     render() {
- 
+
         return (
         <KeyboardAvoidingView behavior="padding" >
         <View style={{flexGrow: 1, flexDirection: 'column',
@@ -72,8 +73,8 @@ export default class JournalForm extends Component {
             <View style={journalStyles.items}>
                 <Text style={journalStyles.headingText}>Dream Type</Text>
             <Select
+                ref={(select) => { this.dreamTypeSelect = select; }}
                 onSelect={(dreamType) => this.setState({dreamType})}
-                defaultText ="Select..."
                 animationType="slide"
                 style={journalStyles.typeInput}
                 textStyle={{color: 'white'}}
@@ -95,6 +96,7 @@ export default class JournalForm extends Component {
                 onChangeText={(title) => this.setState({title})}
                 style={journalStyles.titleInput}
                 placeholder="Title"
+                value={this.state.title}
                 placeholderTextColor='#BD95AF'
                 returnKeyType= "done"
                 autoCorrect={false}
@@ -107,6 +109,7 @@ export default class JournalForm extends Component {
                 onChangeText={(content) => this.setState({content})}
                 style={journalStyles.contentInput}
                 placeholder="Dream Content"
+                value={this.state.content}
                 placeholderTextColor='#BD95AF'
                 returnKeyType= "done"
                 autoCorrect={false}
