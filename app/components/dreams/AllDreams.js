@@ -1,10 +1,12 @@
 
 import React, { Component } from 'react';
-import { Button, Dimensions, ScrollView, StatusBar, StyleSheet, View, KeyboardAvoidingView,  ListView, Image, TouchableOpacity, Text } from 'react-native';
+import { Button, Dimensions, ScrollView, StatusBar, StyleSheet, View, KeyboardAvoidingView,  ListView, Image, TouchableOpacity, Text, Switch } from 'react-native';
 import store from '../../store'
-import { homeStyles, listViewStyles, modalStyles } from '../../assets/styles';
+import { homeStyles, listViewStyles, modalStyles, journalStyles } from '../../assets/styles';
 import Modal from 'react-native-modalbox';
 import DreamModal from './DreamModal';
+
+import { receiveAllDreams, receivePublicDreams } from '../../reducers/dreams'
 
 export const DreamBox = (props) => {
     const dream = props.dream
@@ -15,7 +17,7 @@ export const DreamBox = (props) => {
     const index = props.i
     return (
         <View style={listViewStyles.item}>
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={(evt) => props.handlePress(index)}>
             <Text style={listViewStyles.dateText}>{date.toLocaleString(locale, options)}</Text>
             <Text style={listViewStyles.titleText}>{dream.title}</Text>
@@ -35,35 +37,54 @@ export default class Dreams extends React.Component {
     {/*Boilerplate for ListView*/}
     this.entries = []
     this.state = {
-        dreams: store.getState().dreams,
+        userDreams: store.getState().dreams.userDreams,
+        publicDreams: store.getState().dreams.publicDreams,
         dataSource: ds.cloneWithRows(this.entries),
         isOpen: false,
         isDisabled: false,
+        isPublic: false,
         swipeToClose: true,
         sliderValue: 0.3,
         selectedIndex: 0
     };
     this.handlePress = this.handlePress.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.setDreamBoxes = this.setDreamBoxes.bind(this);
+    this.togglePublicView = this.togglePublicView.bind(this)
   }
 
 handlePress(i) {
   this.setState({selectedIndex: i})
-  this.refs.modal1.open()
+  this.refs.modal.open()
 }
 
 handleClose() {
   this.setState({isOpen: false})
-  this.refs.modal1.close()
+  this.refs.modal.close()
 }
 
+togglePublicView(val) {
+  if (val === true) {
+    store.dispatch(receivePublicDreams())
+    this.setState({isPublic: true})
+  }
+  else {
+    this.setState({isPublic: false})
+    this.setDreamBoxes('userDreams')
+  }
+}
+
+setDreamBoxes(type) {
+  this.entries = this.state[type].map((dream, i) => <DreamBox handlePress={this.handlePress} dream={dream} i={i} key={dream.id} />)
+  this.setState({dataSource:ds.cloneWithRows(this.entries)})
+}
 
 //resetting the state step by step, because it doesn't render all dreams just by updating the state.dreams
   componentDidMount(){
     this.unsubscribe = store.subscribe(()=>{
-      this.setState({dreams: store.getState().dreams})
-      this.entries = this.state.dreams.list.map((dream, i) => <DreamBox handlePress={this.handlePress} dream={dream} i={i} key={dream.id} />)
-      this.setState({dataSource:ds.cloneWithRows(this.entries)})
+      let type = this.state.isPublic ? 'publicDreams' : 'userDreams';
+      this.setState({[type]: store.getState().dreams[type]})
+      this.setDreamBoxes(type)
     })
   }
 
@@ -94,22 +115,37 @@ render() {
             <Text style={homeStyles.text}>Dreams</Text>
           </View>
 
+          <View style={homeStyles.btnContainer}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Switch
+                onValueChange={(value) => this.togglePublicView(value)}
+                style={{marginRight: 10}}
+                onTintColor='#BD95AF'
+                value={this.state.isPublic}
+              />
+              <Text style={journalStyles.headingText}>View Public Dreams</Text>
+            </View>
+            </View>
+
 
         <ListView
           contentContainerStyle={listViewStyles.list}
           dataSource = { this.state.dataSource }
           renderRow={(rowData) => <Text style={listViewStyles.item}>{rowData}</Text>}
+          enableEmptySections={true}
         />
 
           <Modal
             position='bottom'
-            style={[modalStyles.modal, modalStyles.modal1]}
-            ref={"modal1"}
+            style={modalStyles.modal}
+            ref={"modal"}
             swipeToClose={this.state.swipeToClose}
             swipeArea={20}>
             <ScrollView>
-              <View style={{width: screen.width, paddingLeft:10}}>
-              <DreamModal dream={this.state.dreams.list[this.state.selectedIndex]} />
+              <View style={{width: screen.width, paddingLeft:30, paddingRight: 30}}>
+              {
+                this.state.isPublic ? <DreamModal dream={this.state.publicDreams[this.state.selectedIndex]} /> : <DreamModal dream={this.state.userDreams[this.state.selectedIndex]} />
+              }
               </View>
             </ScrollView>
             <TouchableOpacity onPress={this.handleClose}><Text style={modalStyles.btn}>Close</Text></TouchableOpacity>

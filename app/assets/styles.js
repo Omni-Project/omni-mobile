@@ -79,26 +79,32 @@ export const journalStyles = StyleSheet.create({
     backgroundColor: '#3a3a3a',
     borderRadius: 3,
     padding: 15,
-    minHeight: 120
+    minHeight: 180
   },
   titleInput: {
       color: "white",
       height: 40,
-      fontSize: 15
+      fontSize: 20
   },
   contentInput: {
       color: "white",
-      height: 120,
-      fontSize: 15
+      height: 180,
+      fontSize: 20
   },
   headingText: {
       color: '#BD95AF',
       textAlign: 'left',
       marginBottom: 8,
-      fontSize: 13
+      fontSize: 15
     },
     dateText: {
-      color: '#fff'
+      color: '#fff',
+      fontSize: 15
+    },
+    btnText: {
+      color: '#fff',
+      fontSize: 15,
+      fontWeight: '700'
     },
     dateInput: {
       borderRadius: 3,
@@ -197,7 +203,12 @@ export const loginFormStyles = StyleSheet.create({
 export const homeStyles = StyleSheet.create({
   textContainer: {
     padding: '10%',
-    paddingBottom: '7%'
+    paddingBottom: '7%',
+  },
+  btnContainer: {
+    paddingLeft: '10%',
+    paddingRight: '10%',
+    paddingBottom: '5%',
   },
   text: {
     color: '#b4d4ee',
@@ -247,7 +258,6 @@ export const listViewStyles = StyleSheet.create({
 export const modalStyles = StyleSheet.create({
   item: {
     backgroundColor: '#3A3A3A',
-    margin: 10,
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center'
@@ -255,16 +265,13 @@ export const modalStyles = StyleSheet.create({
   modal: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  modal1: {
-    flex:1,
+    alignItems: 'center',
+    paddingTop: 40,
     backgroundColor: "#3A3A3A"
   },
   btn: {
     margin: 10,
-    color: "white",
+    color: "#9c9a9a",
     padding: 10,
     fontSize: 20
   },
@@ -272,7 +279,7 @@ export const modalStyles = StyleSheet.create({
       color: '#9c9a9a',
       fontSize: 20,
       fontWeight: 'bold',
-      marginTop: 40,
+      marginTop: 23,
       marginBottom: 20
     },
     titleText: {
@@ -287,7 +294,7 @@ export const modalStyles = StyleSheet.create({
       marginBottom: 20
     },
     dreamTypeText: {
-      color: '#9c9a9a',
+      color: '#BD95AF',
       fontSize: 18,
       fontStyle: 'italic'
     }
