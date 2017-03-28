@@ -215,7 +215,6 @@ export const homeStyles = StyleSheet.create({
     fontSize: 35,
     fontWeight: 'bold'
   }
-
 })
 
 export const listViewStyles = StyleSheet.create({
@@ -301,3 +300,56 @@ export const modalStyles = StyleSheet.create({
     }
 
 });
+
+export const settingStyles = StyleSheet.create({
+  image: {
+    marginTop: 20,
+    height: 100,
+    borderRadius: 50,
+    width: 100
+  },
+  imageContainer: {
+    alignItems: 'center'
+  },
+  labels: {
+    color: '#BD95AF',
+    textAlign: 'left',
+    marginBottom: 8,
+    fontSize: 25,
+    fontWeight: 'bold',
+    paddingLeft: 8
+  },
+  textContainer: {
+    padding: '10%',
+    paddingBottom: '7%',
+    marginTop: 20,
+    justifyContent: 'space-around',
+    alignItems: 'flex-start',
+    borderRadius: 3,
+  },
+  text: {
+    color: '#fff',
+    marginBottom: 20,
+    fontSize: 20,
+    paddingLeft: 8
+  },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 10
+  },
+  buttonTxt: {
+    textAlign: 'center',
+    color: '#FFFFFF',
+    fontWeight: '700'
+  },
+  button: {
+   backgroundColor: '#BD95AF',
+   paddingVertical:10,
+   paddingHorizontal: 10,
+   width: '38%',
+   borderRadius: 10
+  }
+})
+

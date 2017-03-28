@@ -32,6 +32,7 @@ class Home extends Component {
       icon: ({ tintColor }) => (
         <Image
           source={require('./home.png')}
+          style={{height: 25, width: 25}}
         />
       ),
     },
@@ -74,6 +75,7 @@ export default MyApp = TabNavigator({
     activeTintColor: '#eda6e8',
     style: {
       backgroundColor: 'black',
+      height: 55
     },
   },
 });

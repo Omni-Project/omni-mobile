@@ -8,12 +8,12 @@ export default class Dreams extends React.Component {
   static navigationOptions = {
     tabBar: {
       label: 'Add a Dream',
-      // Note: By default the icon is only shown on iOS. Search the showIcon option below.
-      // icon: ({ tintColor }) => (
-      //   <Image
-      //     source={require('./moon.png')}
-      //   />
-      // ),
+      icon: ({ tintColor }) => (
+        <Image
+          source={require('./plus.png')}
+          style={{height: 25, width: 25}}
+        />
+      ),
     },
   }
     
