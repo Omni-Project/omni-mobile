@@ -313,9 +313,9 @@ export const settingStyles = StyleSheet.create({
     paddingLeft: 8
   },
   textContainer: {
+    padding: '10%',
+    paddingBottom: '7%',
     marginTop: 20,
-    marginBottom: 10,
-    margin: 10,
     justifyContent: 'space-around',
     alignItems: 'flex-start',
     borderRadius: 3,
@@ -330,6 +330,7 @@ export const settingStyles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    marginBottom: 10
   },
   buttonTxt: {
     textAlign: 'center',
@@ -340,7 +341,7 @@ export const settingStyles = StyleSheet.create({
    backgroundColor: '#BD95AF',
    paddingVertical:10,
    paddingHorizontal: 10,
-   width: '25%',
+   width: '38%',
    borderRadius: 10
   }
 })

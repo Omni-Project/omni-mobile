@@ -67,7 +67,10 @@ export default class Settings extends Component {
          <View style={settingStyles.buttonContainer}>
           <View style={settingStyles.button}>
             <TouchableOpacity onPress={this.handleSubmit}>
-              <Text style={settingStyles.buttonTxt}>Log out</Text>
+              <Text style={settingStyles.buttonTxt}>Log out{' '}
+                <Image style={{height: 20, width: 20, position: 'relative', right: '3%'}} source={require('./logout.png')}/>
+              </Text>
+              
           </TouchableOpacity>
           </View>
         </View>
