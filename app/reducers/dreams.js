@@ -6,12 +6,13 @@ const RECEIVE_JOURNAL_ENTRY = 'RECEIVE_JOURNAL_ENTRY'
 const LOAD_ALL_DREAMS = 'LOAD_ALL_DREAMS'
 const LOAD_PUBLIC_DREAMS = 'LOAD_PUBLIC_DREAMS'
 const RECEIVE_DREAM = 'RECEIVE_DREAM'
-
+const GET_WEEK_DREAMS = 'GET_WEEK_DREAMS'
 
 const initialState = {
   userDreams: [],
   selectedDream: {},
-  publicDreams: []
+  publicDreams: [],
+  weekDreams: []
 }
 
 //REDUCER
@@ -33,6 +34,11 @@ const reducer = (state=initialState, action) => {
   case RECEIVE_DREAM:
     newState.userDreams = [...newState.userDreams, action.dream]
     return newState
+
+  case GET_WEEK_DREAMS:
+    newState.weekDreams = action.dreams
+    return newState
+
   }
   return state
 }
@@ -71,6 +77,10 @@ export const loadPublicDreams = dreams => {
 	};
 };
 
+export const getWeekDreams = dreams => ({
+  type: GET_WEEK_DREAMS, dreams
+})
+
 export const receiveAllDreams = (userId,token) =>
 	dispatch => {
 		axios.get(`http://localhost:1337/api/dreams/user/${userId}?token=${token}`)
@@ -89,5 +99,12 @@ export const receivePublicDreams = () =>
       .catch(console.error);
     }
 
+export const fetchWeekAnalytics = (userId) =>
+  dispatch => {
+    axios.get(`http://localhost:1337/api/analytics/${userId}`)
+    .then(res => res.data)
+    .then(dreams => dispatch(getWeekDreams(dreams)))
+    .catch(console.error)
+}
 
 export default reducer
