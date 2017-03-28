@@ -6,6 +6,8 @@ import { homeStyles, listViewStyles, modalStyles } from '../../assets/styles';
 import Modal from 'react-native-modalbox';
 import DreamModal from './DreamModal';
 
+import { receiveAllDreams, receivePublicDreams } from '../../reducers/dreams'
+
 export const DreamBox = (props) => {
     const dream = props.dream
     //date formatting
@@ -35,41 +37,54 @@ export default class Dreams extends React.Component {
     {/*Boilerplate for ListView*/}
     this.entries = []
     this.state = {
-        dreams: store.getState().dreams,
+        userDreams: store.getState().dreams.userDreams,
+        publicDreams: store.getState().dreams.publicDreams,
         dataSource: ds.cloneWithRows(this.entries),
         isOpen: false,
         isDisabled: false,
+        isPublic: false,
         swipeToClose: true,
         sliderValue: 0.3,
         selectedIndex: 0
     };
     this.handlePress = this.handlePress.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.setPublicDreams = this.setPublicDreams.bind(this)
+    this.setDreamBoxes = this.setDreamBoxes.bind(this);
+    this.viewPublicDreams = this.viewPublicDreams.bind(this);
+    this.viewUserDreams = this.viewUserDreams.bind(this)
   }
 
 handlePress(i) {
   this.setState({selectedIndex: i})
-  this.refs.modal1.open()
+  this.refs.modal.open()
 }
 
 handleClose() {
   this.setState({isOpen: false})
-  this.refs.modal1.close()
+  this.refs.modal.close()
 }
 
-setPublicDreams() {
-  this.entries = this.state.dreams.publicDreams.map((dream, i) => <DreamBox handlePress={this.handlePress} dream={dream} i={i} key={dream.id} />)
+viewPublicDreams() {
+  store.dispatch(receivePublicDreams())
+  this.setState({isPublic: true})
+}
+
+viewUserDreams() {
+  this.setState({isPublic: false})
+  this.setDreamBoxes('userDreams')
+}
+
+setDreamBoxes(type) {
+  this.entries = this.state[type].map((dream, i) => <DreamBox handlePress={this.handlePress} dream={dream} i={i} key={dream.id} />)
   this.setState({dataSource:ds.cloneWithRows(this.entries)})
 }
-
 
 //resetting the state step by step, because it doesn't render all dreams just by updating the state.dreams
   componentDidMount(){
     this.unsubscribe = store.subscribe(()=>{
-      this.setState({dreams: store.getState().dreams})
-      this.entries = this.state.dreams.list.map((dream, i) => <DreamBox handlePress={this.handlePress} dream={dream} i={i} key={dream.id} />)
-      this.setState({dataSource:ds.cloneWithRows(this.entries)})
+      let type = this.state.isPublic ? 'publicDreams' : 'userDreams';
+      this.setState({[type]: store.getState().dreams[type]})
+      this.setDreamBoxes(type)
     })
   }
 
@@ -97,11 +112,13 @@ render() {
          <StatusBar barStyle='light-content' />
           <View style={homeStyles.textContainer}>
             <Text style={homeStyles.text}>Dreams</Text>
-
-            <TouchableOpacity onPress={this.setPublicDreams}><Text style={modalStyles.btn}>Public Dreams</Text></TouchableOpacity>
-
-
           </View>
+
+          <View style={{flexDirection: 'row'}}>
+            <Text style={modalStyles.btn}>Filter: </Text>
+            <TouchableOpacity onPress={this.viewUserDreams}><Text style={modalStyles.btn}>Your Dreams</Text></TouchableOpacity>
+            <TouchableOpacity onPress={this.viewPublicDreams}><Text style={modalStyles.btn}>Public Dreams</Text></TouchableOpacity>
+            </View>
 
 
         <ListView
@@ -114,12 +131,14 @@ render() {
           <Modal
             position='bottom'
             style={modalStyles.modal}
-            ref={"modal1"}
+            ref={"modal"}
             swipeToClose={this.state.swipeToClose}
             swipeArea={20}>
             <ScrollView>
               <View style={{width: screen.width, paddingLeft:30, paddingRight: 30}}>
-              <DreamModal dream={this.state.dreams.list[this.state.selectedIndex]} />
+              {
+                this.state.isPublic ? <DreamModal dream={this.state.publicDreams[this.state.selectedIndex]} /> : <DreamModal dream={this.state.userDreams[this.state.selectedIndex]} />
+              }
               </View>
             </ScrollView>
             <TouchableOpacity onPress={this.handleClose}><Text style={modalStyles.btn}>Close</Text></TouchableOpacity>

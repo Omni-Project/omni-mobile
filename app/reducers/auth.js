@@ -55,7 +55,7 @@ export const getUser = () =>
             } else {
               dispatch(setUser(data.user))
               dispatch(receiveAllDreams(data.user.id, token))
-              dispatch(receivePublicDreams())
+              // dispatch(receivePublicDreams())
             }
 
           })

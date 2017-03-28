@@ -9,7 +9,7 @@ const RECEIVE_DREAM = 'RECEIVE_DREAM'
 
 
 const initialState = {
-  list: [],
+  userDreams: [],
   selectedDream: {},
   publicDreams: []
 }
@@ -23,7 +23,7 @@ const reducer = (state=initialState, action) => {
     return action.dream
 
   case LOAD_ALL_DREAMS:
-    newState.list = action.dreams
+    newState.userDreams = action.dreams
     return newState
 
   case LOAD_PUBLIC_DREAMS:
@@ -31,7 +31,7 @@ const reducer = (state=initialState, action) => {
     return newState
 
   case RECEIVE_DREAM:
-    newState.list = [...newState.list, action.dream]
+    newState.userDreams = [...newState.userDreams, action.dream]
     return newState
   }
   return state
