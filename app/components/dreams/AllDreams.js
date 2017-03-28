@@ -45,6 +45,7 @@ export default class Dreams extends React.Component {
     };
     this.handlePress = this.handlePress.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.setPublicDreams = this.setPublicDreams.bind(this)
   }
 
 handlePress(i) {
@@ -55,6 +56,11 @@ handlePress(i) {
 handleClose() {
   this.setState({isOpen: false})
   this.refs.modal1.close()
+}
+
+setPublicDreams() {
+  this.entries = this.state.dreams.publicDreams.map((dream, i) => <DreamBox handlePress={this.handlePress} dream={dream} i={i} key={dream.id} />)
+  this.setState({dataSource:ds.cloneWithRows(this.entries)})
 }
 
 
@@ -91,6 +97,10 @@ render() {
          <StatusBar barStyle='light-content' />
           <View style={homeStyles.textContainer}>
             <Text style={homeStyles.text}>Dreams</Text>
+
+            <TouchableOpacity onPress={this.setPublicDreams}><Text style={modalStyles.btn}>Public Dreams</Text></TouchableOpacity>
+
+
           </View>
 
 

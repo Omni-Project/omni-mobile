@@ -4,11 +4,14 @@ import localPhoneStorage from 'react-native-simple-store'
 //CONSTANTS
 const RECEIVE_JOURNAL_ENTRY = 'RECEIVE_JOURNAL_ENTRY'
 const LOAD_ALL_DREAMS = 'LOAD_ALL_DREAMS'
+const LOAD_PUBLIC_DREAMS = 'LOAD_PUBLIC_DREAMS'
 const RECEIVE_DREAM = 'RECEIVE_DREAM'
+
 
 const initialState = {
   list: [],
-  selectedDream: {}
+  selectedDream: {},
+  publicDreams: []
 }
 
 //REDUCER
@@ -22,7 +25,11 @@ const reducer = (state=initialState, action) => {
   case LOAD_ALL_DREAMS:
     newState.list = action.dreams
     return newState
-  
+
+  case LOAD_PUBLIC_DREAMS:
+    newState.publicDreams = action.dreams
+    return newState
+
   case RECEIVE_DREAM:
     newState.list = [...newState.list, action.dream]
     return newState
@@ -57,11 +64,27 @@ export const loadAllDreams = dreams => {
 	};
 };
 
+export const loadPublicDreams = dreams => {
+	return {
+		type: LOAD_PUBLIC_DREAMS,
+		dreams
+	};
+};
+
 export const receiveAllDreams = (userId,token) =>
 	dispatch => {
 		axios.get(`http://localhost:1337/api/dreams/user/${userId}?token=${token}`)
 			.then((res) => {
         dispatch(loadAllDreams(res.data))
+      })
+      .catch(console.error);
+    }
+
+export const receivePublicDreams = () =>
+	dispatch => {
+		axios.get(`http://localhost:1337/api/dreams/public`)
+			.then((res) => {
+        dispatch(loadPublicDreams(res.data))
       })
       .catch(console.error);
     }
