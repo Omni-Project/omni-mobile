@@ -203,7 +203,12 @@ export const loginFormStyles = StyleSheet.create({
 export const homeStyles = StyleSheet.create({
   textContainer: {
     padding: '10%',
-    paddingBottom: '7%'
+    paddingBottom: '7%',
+  },
+  btnContainer: {
+    paddingLeft: '10%',
+    paddingRight: '10%',
+    paddingBottom: '5%',
   },
   text: {
     color: '#b4d4ee',

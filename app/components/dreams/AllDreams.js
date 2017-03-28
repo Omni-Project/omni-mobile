@@ -1,8 +1,8 @@
 
 import React, { Component } from 'react';
-import { Button, Dimensions, ScrollView, StatusBar, StyleSheet, View, KeyboardAvoidingView,  ListView, Image, TouchableOpacity, Text } from 'react-native';
+import { Button, Dimensions, ScrollView, StatusBar, StyleSheet, View, KeyboardAvoidingView,  ListView, Image, TouchableOpacity, Text, Switch } from 'react-native';
 import store from '../../store'
-import { homeStyles, listViewStyles, modalStyles } from '../../assets/styles';
+import { homeStyles, listViewStyles, modalStyles, journalStyles } from '../../assets/styles';
 import Modal from 'react-native-modalbox';
 import DreamModal from './DreamModal';
 
@@ -50,8 +50,7 @@ export default class Dreams extends React.Component {
     this.handlePress = this.handlePress.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.setDreamBoxes = this.setDreamBoxes.bind(this);
-    this.viewPublicDreams = this.viewPublicDreams.bind(this);
-    this.viewUserDreams = this.viewUserDreams.bind(this)
+    this.togglePublicView = this.togglePublicView.bind(this)
   }
 
 handlePress(i) {
@@ -64,14 +63,15 @@ handleClose() {
   this.refs.modal.close()
 }
 
-viewPublicDreams() {
-  store.dispatch(receivePublicDreams())
-  this.setState({isPublic: true})
-}
-
-viewUserDreams() {
-  this.setState({isPublic: false})
-  this.setDreamBoxes('userDreams')
+togglePublicView(val) {
+  if (val === true) {
+    store.dispatch(receivePublicDreams())
+    this.setState({isPublic: true})
+  }
+  else {
+    this.setState({isPublic: false})
+    this.setDreamBoxes('userDreams')
+  }
 }
 
 setDreamBoxes(type) {
@@ -114,10 +114,16 @@ render() {
             <Text style={homeStyles.text}>Dreams</Text>
           </View>
 
-          <View style={{flexDirection: 'row'}}>
-            <Text style={modalStyles.btn}>Filter: </Text>
-            <TouchableOpacity onPress={this.viewUserDreams}><Text style={modalStyles.btn}>Your Dreams</Text></TouchableOpacity>
-            <TouchableOpacity onPress={this.viewPublicDreams}><Text style={modalStyles.btn}>Public Dreams</Text></TouchableOpacity>
+          <View style={homeStyles.btnContainer}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Switch
+                onValueChange={(value) => this.togglePublicView(value)}
+                style={{marginRight: 10}}
+                onTintColor='#BD95AF'
+                value={this.state.isPublic}
+              />
+              <Text style={journalStyles.headingText}>View Public Dreams</Text>
+            </View>
             </View>
 
 
