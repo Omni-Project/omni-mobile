@@ -203,7 +203,12 @@ export const loginFormStyles = StyleSheet.create({
 export const homeStyles = StyleSheet.create({
   textContainer: {
     padding: '10%',
-    paddingBottom: '7%'
+    paddingBottom: '7%',
+  },
+  btnContainer: {
+    paddingLeft: '10%',
+    paddingRight: '10%',
+    paddingBottom: '5%',
   },
   text: {
     color: '#b4d4ee',
@@ -253,7 +258,6 @@ export const listViewStyles = StyleSheet.create({
 export const modalStyles = StyleSheet.create({
   item: {
     backgroundColor: '#3A3A3A',
-    margin: 10,
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center'
@@ -261,16 +265,13 @@ export const modalStyles = StyleSheet.create({
   modal: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  modal1: {
-    flex:1,
+    alignItems: 'center',
+    paddingTop: 40,
     backgroundColor: "#3A3A3A"
   },
   btn: {
     margin: 10,
-    color: "white",
+    color: "#9c9a9a",
     padding: 10,
     fontSize: 20
   },
@@ -278,7 +279,7 @@ export const modalStyles = StyleSheet.create({
       color: '#9c9a9a',
       fontSize: 20,
       fontWeight: 'bold',
-      marginTop: 40,
+      marginTop: 23,
       marginBottom: 20
     },
     titleText: {
@@ -293,14 +294,17 @@ export const modalStyles = StyleSheet.create({
       marginBottom: 20
     },
     dreamTypeText: {
-      color: '#9c9a9a',
+      color: '#BD95AF',
       fontSize: 18,
       fontStyle: 'italic'
     }
 
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 29573c8794e61359ed397496a7b05263a6d8f851
 
 export const settingStyles = StyleSheet.create({
   image: {
@@ -353,5 +357,3 @@ export const settingStyles = StyleSheet.create({
    borderRadius: 10
   }
 })
-
->>>>>>> bc33410d4f7fbaee1c309f16954df55e79e79525
