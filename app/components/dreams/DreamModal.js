@@ -1,8 +1,8 @@
 
-import React, { Component } from 'react';
-import { StatusBar, StyleSheet, View, KeyboardAvoidingView,  ListView, Image, TouchableOpacity, Text } from 'react-native';
-import { homeStyles, listViewStyles, modalStyles } from '../../assets/styles';
-import Modal from 'react-native-modalbox';
+import React from 'react';
+import { Text, View } from 'react-native';
+import { modalStyles } from '../../assets/styles';
+
 
 // Props =>  props.dream
 export default (props) => {

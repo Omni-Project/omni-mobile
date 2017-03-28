@@ -103,12 +103,12 @@ render() {
 
           <Modal
             position='bottom'
-            style={[modalStyles.modal, modalStyles.modal1]}
+            style={modalStyles.modal}
             ref={"modal1"}
             swipeToClose={this.state.swipeToClose}
             swipeArea={20}>
             <ScrollView>
-              <View style={{width: screen.width, paddingLeft:10}}>
+              <View style={{width: screen.width, paddingLeft:30, paddingRight: 30}}>
               <DreamModal dream={this.state.dreams.list[this.state.selectedIndex]} />
               </View>
             </ScrollView>
