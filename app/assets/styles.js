@@ -1,4 +1,4 @@
-import {StyleSheet} from'react-native'
+import {StyleSheet} from 'react-native'
 
 export default StyleSheet.create({
   backgroundView: {
@@ -300,11 +300,6 @@ export const modalStyles = StyleSheet.create({
     }
 
 });
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 29573c8794e61359ed397496a7b05263a6d8f851
 
 export const settingStyles = StyleSheet.create({
   image: {
