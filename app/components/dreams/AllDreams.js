@@ -1,12 +1,13 @@
 
 import React, { Component } from 'react';
-import { Button, Dimensions, ScrollView, StatusBar, StyleSheet, View, KeyboardAvoidingView,  ListView, Image, TouchableOpacity, Text, Switch } from 'react-native';
+import { Button, Dimensions, ScrollView, StatusBar, StyleSheet, View, KeyboardAvoidingView,  ListView, Image, TouchableOpacity, Text, Switch, WebView } from 'react-native';
 import store from '../../store'
 import { homeStyles, listViewStyles, modalStyles, journalStyles } from '../../assets/styles';
 import Modal from 'react-native-modalbox';
 import DreamModal from './DreamModal';
-
+import WebVRSingleSprite from './WebVRSingleSprite'
 import { receiveAllDreams, receivePublicDreams } from '../../reducers/dreams'
+import localPhoneStorage from 'react-native-simple-store'
 
 export const DreamBox = (props) => {
     const dream = props.dream
@@ -18,7 +19,7 @@ export const DreamBox = (props) => {
     return (
         <View style={listViewStyles.item}>
         <TouchableOpacity
-          onPress={(evt) => props.handlePress(index)}>
+          onPress={(evt) => props.handlePress(index, "modal1")}>
             <Text style={listViewStyles.dateText}>{date.toLocaleString(locale, options)}</Text>
             <Text style={listViewStyles.titleText}>{dream.title}</Text>
             <Text style={listViewStyles.dreamTypeText}>{dream.dreamType}</Text>
@@ -45,7 +46,8 @@ export default class Dreams extends React.Component {
         isPublic: false,
         swipeToClose: true,
         sliderValue: 0.3,
-        selectedIndex: 0
+        selectedIndex: 0,
+        uri: ''
     };
     this.handlePress = this.handlePress.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -53,14 +55,29 @@ export default class Dreams extends React.Component {
     this.togglePublicView = this.togglePublicView.bind(this)
   }
 
-handlePress(i) {
-  this.setState({selectedIndex: i})
-  this.refs.modal.open()
+handlePress(i, modal) {
+  if(modal === "modal1"){
+    this.setState({selectedIndex: i})
+    this.refs.modal1.open()
+  }else if(modal === "modal2"){
+    const user=store.getState().auth
+    const token=localPhoneStorage.get('token')
+      .then(token => {
+        //hardcoded to localhost for now
+        this.setState({uri: `http://localhost:1337/mobile-vr/${user.id}/${i.id}/${token}`})
+        this.refs.modal2.open()
+      })
+  }
 }
 
-handleClose() {
-  this.setState({isOpen: false})
-  this.refs.modal.close()
+handleClose(modal) {
+  if(modal === "modal1"){
+    this.setState({isOpen: false})
+    this.refs.modal1.close()
+  }else{
+    this.setState({isOpen: false})
+    this.refs.modal2.close()
+  }
 }
 
 togglePublicView(val) {
@@ -108,6 +125,7 @@ setDreamBoxes(type) {
 
 
 render() {
+  const dreamToPass = this.state.isPublic ? this.state.publicDreams[this.state.selectedIndex] : this.state.userDreams[this.state.selectedIndex]
     return (
       <View style={{flex:1}}>
          <StatusBar barStyle='light-content' />
@@ -134,11 +152,11 @@ render() {
           renderRow={(rowData) => <Text style={listViewStyles.item}>{rowData}</Text>}
           enableEmptySections={true}
         />
-
+        {/*DREAM CONTENT MODAL*/}
           <Modal
             position='bottom'
             style={modalStyles.modal}
-            ref={"modal"}
+            ref={"modal1"}
             swipeToClose={this.state.swipeToClose}
             swipeArea={20}>
             <ScrollView>
@@ -148,7 +166,29 @@ render() {
               }
               </View>
             </ScrollView>
-            <TouchableOpacity onPress={this.handleClose}><Text style={modalStyles.btn}>Close</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => this.handlePress(dreamToPass, "modal2")}><Text style={modalStyles.btn}>View Dream Sprite</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => this.handleClose("modal1")}><Text style={modalStyles.btn}>Close</Text></TouchableOpacity>
+          </Modal>
+
+          {/*WEBVR MODAL*/}
+          <Modal
+            position='bottom'
+            style={modalStyles.modal}
+            ref={"modal2"}
+            swipeToClose={this.state.swipeToClose}
+            swipeArea={500}>
+              <WebView
+                source={{uri: this.state.uri}}
+                style={{marginTop: 0}}
+                scalesPageToFit={true}
+                bounces={true}
+                scrollEnabled={false}
+                style={{
+                  marginTop: 0,
+                  maxHeight: "100%",
+                  width: "100%",
+                }}
+              />
           </Modal>
         </View>
     )
