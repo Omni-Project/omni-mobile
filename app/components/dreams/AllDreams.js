@@ -78,6 +78,7 @@ handleClose() {
       icon: ({ tintColor }) => (
         <Image
           source={require('./moon.png')}
+          style={{height: 25, width: 25}}
         />
       ),
     },
