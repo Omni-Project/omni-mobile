@@ -5,7 +5,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Switch,
-  AlertIOS
+  AlertIOS, ScrollView
 } from 'react-native';
 import { Button, Icon } from 'native-base';
 import {Select, Option} from "react-native-chooser";
@@ -59,10 +59,16 @@ export default class JournalForm extends Component {
     render() {
 
         return (
-        <KeyboardAvoidingView behavior="padding" >
-        <View style={{flexGrow: 1, flexDirection: 'column',
-      justifyContent:'flex-start',  paddingLeft: '10%', paddingRight: '10%'}}>
 
+        <View>
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          onScroll={() => { console.log('onScroll!'); }}
+          scrollEventThrottle={200}
+          style={{height: 500}}>
+
+        <View style={{flexGrow: 1, flexDirection: 'column',
+            justifyContent:'flex-start',  paddingLeft: '10%', paddingRight: '10%', marginBottom: '5%'}}>
 
         {/*Date of Dream && Type*/}
         <View style={{flexDirection: 'row'}}>
@@ -77,12 +83,12 @@ export default class JournalForm extends Component {
                 onSelect={(dreamType) => this.setState({dreamType})}
                 animationType="slide"
                 style={journalStyles.typeInput}
-                textStyle={{color: 'white'}}
+                textStyle={journalStyles.dateText}
                 backdropStyle ={journalStyles.datePicker}
                 optionListStyle={{backgroundColor: "#c0b4ca", height: 190, borderColor: '#c0b4ca', borderRadius: 3}}
                 >
                 {['Daydream', 'Lucid Dream', 'Nightmare', 'Normal Dream', 'Recurring Dream'].map((type, i) =>
-                   <Option value={type} styleText={{color: '#252525'}} key={i}>{type}</Option>
+                   <Option value={type} styleText={{color: '#252525', fontSize: 15}} key={i}>{type}</Option>
                 )}
 
             </Select>
@@ -104,6 +110,7 @@ export default class JournalForm extends Component {
         </View>
 
         {/*Content*/}
+
         <View style={journalStyles.contentContainer}>
             <TextInput
                 onChangeText={(content) => this.setState({content})}
@@ -131,8 +138,8 @@ export default class JournalForm extends Component {
             </View>
         </View>
 
-        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
         {/*Make public?*/}
+        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
             <Switch
             onValueChange={(value) => this.setState({isPublic: value})}
             style={{marginRight: 10}}
@@ -141,16 +148,19 @@ export default class JournalForm extends Component {
             <Text style={journalStyles.headingText}>Make this public?</Text>
         </View>
 
-
+        {/* Save button */}
         <View style={journalStyles.saveButton}>
             <Button onPress={this.onJournalSave} style={{ backgroundColor: '#BD95AF'}}>
                 <Icon name="checkmark" />
-                <Text style={loginFormStyles.buttonTxt}>Save</Text>
+                <Text style={journalStyles.btnText}>Save</Text>
             </Button>
         </View>
+
+     </View>
+</ScrollView>
         </View>
 
-    </KeyboardAvoidingView>
+
     );
   }
 }

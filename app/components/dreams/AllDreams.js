@@ -15,7 +15,7 @@ export const DreamBox = (props) => {
     const index = props.i
     return (
         <View style={listViewStyles.item}>
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={(evt) => props.handlePress(index)}>
             <Text style={listViewStyles.dateText}>{date.toLocaleString(locale, options)}</Text>
             <Text style={listViewStyles.titleText}>{dream.title}</Text>
@@ -98,6 +98,7 @@ render() {
           contentContainerStyle={listViewStyles.list}
           dataSource = { this.state.dataSource }
           renderRow={(rowData) => <Text style={listViewStyles.item}>{rowData}</Text>}
+          enableEmptySections={true}
         />
 
           <Modal

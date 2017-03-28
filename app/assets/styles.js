@@ -79,26 +79,32 @@ export const journalStyles = StyleSheet.create({
     backgroundColor: '#3a3a3a',
     borderRadius: 3,
     padding: 15,
-    minHeight: 120
+    minHeight: 180
   },
   titleInput: {
       color: "white",
       height: 40,
-      fontSize: 15
+      fontSize: 20
   },
   contentInput: {
       color: "white",
-      height: 120,
-      fontSize: 15
+      height: 180,
+      fontSize: 20
   },
   headingText: {
       color: '#BD95AF',
       textAlign: 'left',
       marginBottom: 8,
-      fontSize: 13
+      fontSize: 15
     },
     dateText: {
-      color: '#fff'
+      color: '#fff',
+      fontSize: 15
+    },
+    btnText: {
+      color: '#fff',
+      fontSize: 15,
+      fontWeight: '700'
     },
     dateInput: {
       borderRadius: 3,
