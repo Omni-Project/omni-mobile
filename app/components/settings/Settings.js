@@ -58,7 +58,7 @@ export default class Settings extends Component {
             <Text style={settingStyles.text}>{this.state.user.name}</Text>
             <Text style={settingStyles.labels}>Email:</Text>
             <Text style={settingStyles.text}>{this.state.user.email}</Text>
-            <Text style={settingStyles.labels}>To change your settings, please go to the website! </Text>
+            <Text style={settingStyles.changeTxt}>To change your settings, please go to the website! </Text>
           </View>
 
 
@@ -66,7 +66,7 @@ export default class Settings extends Component {
          <View style={settingStyles.buttonContainer}>
           <View style={settingStyles.button}>
             <TouchableOpacity onPress={this.handleSubmit}>
-              <Text style={settingStyles.buttonTxt}><Image style={{height: 20, width: 20, position: 'relative', right: '3%'}} source={require('./logout.png')}/>{' '}Log out</Text>
+              <Text style={settingStyles.buttonTxt}><Image style={{height: 20, width: 20, paddingTop: 25}} source={require('./logout.png')}/>{'  '}Log out</Text>
 
           </TouchableOpacity>
           </View>
