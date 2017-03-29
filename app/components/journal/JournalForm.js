@@ -63,7 +63,7 @@ export default class JournalForm extends Component {
         <View>
         <ScrollView
           automaticallyAdjustContentInsets={false}
-          onScroll={() => { console.log('onScroll!'); }}
+          onScroll={() => { console.log(''); }}
           scrollEventThrottle={200}
           style={{height: 500}}>
 
