@@ -194,17 +194,24 @@ class Home extends Component {
     const { navigate } = this.props.navigation;
 
     return (
-       <ScrollView>
+       <View>
       {/*Make phone-related status bar light*/}
         <StatusBar barStyle='light-content' />
 
         <View style={homeStyles.textContainer}>
           <Text style={{
-            color: '#b4d4ee',
+            color: '#c8d8fc',
             fontSize: 35,
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            fontFamily: 'Helvetica Neue'
           }}>Home</Text>
         </View>
+
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          onScroll={() => { console.log(''); }}
+          scrollEventThrottle={200}
+          style={{height: 505}}>
 
       <View style={{backgroundColor: '#2d2d2d'}}>
         <View style={homeStyles.textContainer}>
@@ -212,7 +219,7 @@ class Home extends Component {
         color: '#BD95AF',
         fontSize: 25,
         fontWeight: 'bold'
-      }}>Hours Slept In Week</Text>
+      }}>Hours Slept Last Week</Text>
         </View>
 
         <VictoryChart
@@ -224,7 +231,7 @@ class Home extends Component {
             style={{
               labels: centeredLabelStyles
             }}
-            labelRadius="100"
+
             labels={(datum) => `${+datum.hours}` > 0 ? `${datum.day}\n, ${datum.hours}\n hrs` : `${datum.day}`}
             data={data}
             width={350} height={350}
@@ -243,8 +250,8 @@ class Home extends Component {
         fontWeight: 'bold'
       }}>Average Sleep Per Night</Text>
 
-      <View style={{backgroundColor: '#212121', borderRadius: 100, width: 120, padding: 15, margin: 15, alignItems: 'center'}}>
-      <Text style={{fontSize: 50, fontWeight: 'bold', color: '#a974d5'}}>{store.getState().auth.averageSleep}</Text>
+      <View style={{backgroundColor: '#212121', borderRadius: 100, height: 130, width: 130, margin: 15, alignItems: 'center', justifyContent: 'center'}}>
+      <Text style={{fontSize: 40, fontWeight: 'bold', color: '#a974d5'}}>{store.getState().auth.averageSleep}</Text>
       </View>
       </View>
 
@@ -255,14 +262,15 @@ class Home extends Component {
         fontWeight: 'bold'
       }}>Sleep Debt</Text>
 
-      <View style={{backgroundColor: '#212121', borderRadius: 100, width: 120, padding: 15, margin: 15, alignItems: 'center'}}>
-      <Text style={{fontSize: 50, fontWeight: 'bold', color: '#a974d5'}}>{store.getState().auth.sleepDebt}</Text>
+      <View style={{backgroundColor: '#212121', borderRadius: 100, height: 130, width: 130, margin: 15, alignItems: 'center', justifyContent: 'center'}}>
+      <Text style={{fontSize: 40, fontWeight: 'bold', color: '#a974d5'}}>{store.getState().auth.sleepDebt}</Text>
       </View>
       <Text style={{color: '#9b9b9b', fontStyle: 'italic', fontSize: 14}}>Based on recommended 8 hrs of sleep/night</Text>
       </View>
 
 
       </ScrollView>
+      </View>
     );
   }
 }

@@ -9,22 +9,26 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   drawerComponent:{
-    backgroundColor: '#3a3a3a'
+    backgroundColor: '#333'
   },
   appText: {
-    color: '#eaeaea'
+    color: '#eaeaea',
+    fontFamily: 'Helvetica Neue'
   },
   biggerAppText: {
     color: '#eaeaea',
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: 'Helvetica Neue'
   },
   altAppText: {
-    color: '#ffffff'
+    color: '#ffffff',
+    fontFamily: 'Helvetica Neue'
   },
   buttonText: {
     color: '#ffffff',
     textAlign: 'center',
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: 'Helvetica Neue'
   },
   pushNotificationsView: {
     height: 400,
@@ -55,7 +59,7 @@ export default StyleSheet.create({
 
 export const landingPageStyles = StyleSheet.create({
     appContainer: {
-        backgroundColor: '#252525',
+        backgroundColor: '#242424',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -69,45 +73,50 @@ export const journalStyles = StyleSheet.create({
   },
   titleContainer: {
     marginBottom: 20,
-    backgroundColor: '#3a3a3a',
-    borderRadius: 3,
+    backgroundColor: '#333',
+    borderRadius: 2,
     paddingLeft: 15,
     height: 40
   },
   contentContainer: {
     marginBottom: 20,
-    backgroundColor: '#3a3a3a',
-    borderRadius: 3,
+    backgroundColor: '#333',
+    borderRadius: 2,
     padding: 15,
     minHeight: 180
   },
   titleInput: {
       color: "white",
       height: 40,
-      fontSize: 20
+      fontSize: 20,
+    fontFamily: 'Helvetica Neue'
   },
   contentInput: {
       color: "white",
       height: 180,
-      fontSize: 20
+      fontSize: 20,
+    fontFamily: 'Helvetica Neue'
   },
   headingText: {
       color: '#BD95AF',
       textAlign: 'left',
       marginBottom: 8,
-      fontSize: 15
+      fontSize: 15,
+    fontFamily: 'Helvetica Neue'
     },
     dateText: {
       color: '#fff',
-      fontSize: 15
+      fontSize: 15,
+    fontFamily: 'Helvetica Neue'
     },
     btnText: {
       color: '#fff',
       fontSize: 15,
-      fontWeight: '700'
+      fontWeight: '700',
+    fontFamily: 'Helvetica Neue'
     },
     dateInput: {
-      borderRadius: 3,
+      borderRadius: 2,
       borderColor: "#3a3a3a",
       borderWidth: 2
     },
@@ -115,7 +124,7 @@ export const journalStyles = StyleSheet.create({
       backgroundColor: '#c0b4ca'
     },
     typeInput: {
-      borderRadius: 3,
+      borderRadius: 2,
       borderColor: "#3a3a3a",
       borderWidth: 2,
       width: 180,
@@ -127,7 +136,7 @@ export const journalStyles = StyleSheet.create({
     saveButton: {
       backgroundColor: '#BD95AF',
       width: '100%',
-      borderRadius: 3,
+      borderRadius: 2,
       marginTop: 10,
       flexDirection: 'row',
       justifyContent: 'center',
@@ -155,7 +164,8 @@ export const loginStyles = StyleSheet.create({
       marginTop: 10,
       width: 160,
       textAlign: 'center',
-      opacity: 0.9
+      opacity: 0.9,
+    fontFamily: 'Helvetica Neue'
   }
 });
 
@@ -172,14 +182,16 @@ export const loginFormStyles = StyleSheet.create({
       textAlign: 'center',
       fontSize: 18,
       color: '#FFF',
-      marginBottom: 10
+      marginBottom: 10,
+      fontFamily: 'Helvetica Neue'
   },
   input: {
-      height: 30,
-      backgroundColor: '#3A3A3A',
+      height: 46,
+      backgroundColor: '#333',
       marginBottom: 10,
       color: '#FFF',
-      paddingHorizontal: 10
+      paddingHorizontal: 10,
+      borderRadius: 2
   },
   buttonContainer: {
       flexDirection: 'row',
@@ -188,13 +200,16 @@ export const loginFormStyles = StyleSheet.create({
   buttonTxt: {
     textAlign: 'center',
     color: '#FFFFFF',
-    fontWeight: '700'
+    fontSize: 15,
+    fontWeight: '700',
+    fontFamily: 'Helvetica Neue'
   },
   button: {
     backgroundColor: '#BD95AF',
-    paddingVertical:10,
-    paddingHorizontal: 10,
-    width: '100%'
+    paddingTop:12,
+    width: '100%',
+    height: 45,
+    borderRadius: 2
   }
 
 });
@@ -225,9 +240,10 @@ export const homeStyles = StyleSheet.create({
     paddingBottom: '5%',
   },
   text: {
-    color: '#b4d4ee',
+    color: '#c8d8fc',
     fontSize: 35,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue'
   }
 })
 
@@ -235,22 +251,26 @@ export const listViewStyles = StyleSheet.create({
     dateText: {
       color: '#9c9a9a',
       fontSize: 20,
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontFamily: 'Helvetica Neue'
     },
     titleText: {
       color: '#BD95AF',
       fontSize: 27,
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontFamily: 'Helvetica Neue'
     },
     contentText: {
       color: 'white',
       fontSize: 13,
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontFamily: 'Helvetica Neue'
     },
     dreamTypeText: {
       color: '#9c9a9a',
       fontSize: 20,
-      fontStyle: 'italic'
+      fontStyle: 'italic',
+      fontFamily: 'Helvetica Neue'
     },
     list: {
       justifyContent: 'center',
@@ -258,7 +278,7 @@ export const listViewStyles = StyleSheet.create({
       flexWrap: 'wrap',
     },
     item: {
-      backgroundColor: '#3A3A3A',
+      backgroundColor: '#333',
       margin: 5,
       justifyContent: 'space-around',
       padding: 15,
@@ -271,7 +291,7 @@ export const listViewStyles = StyleSheet.create({
 
 export const modalStyles = StyleSheet.create({
   item: {
-    backgroundColor: '#3A3A3A',
+    backgroundColor: '#333',
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center'
@@ -281,7 +301,7 @@ export const modalStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 40,
-    backgroundColor: "#3A3A3A"
+    backgroundColor: "#333"
   },
   btn: {
     margin: 10,
@@ -294,23 +314,27 @@ export const modalStyles = StyleSheet.create({
       fontSize: 20,
       fontWeight: 'bold',
       marginTop: 23,
-      marginBottom: 20
+      marginBottom: 20,
+      fontFamily: 'Helvetica Neue'
     },
     titleText: {
       color: '#BD95AF',
       fontSize: 40,
       fontWeight: 'bold',
-      marginBottom: 20
+      marginBottom: 20,
+      fontFamily: 'Helvetica Neue'
     },
     contentText: {
       color: 'white',
       fontSize: 25,
-      marginBottom: 20
+      marginBottom: 20,
+      fontFamily: 'HelveticaNeue-Light'
     },
     dreamTypeText: {
       color: '#BD95AF',
       fontSize: 18,
-      fontStyle: 'italic'
+      fontStyle: 'italic',
+      fontFamily: 'Helvetica Neue'
     }
 
 });
@@ -337,12 +361,14 @@ export const webVRStyles = StyleSheet.create({
   btnTextVisible: {
     color: 'rgba(255, 255, 255, 0.5)',
     fontSize: 30,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: 'Helvetica Neue'
   },
   btnTextInvisible: {
     color: 'rgba(255, 255, 255, 0)',
     fontSize: 30,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: 'Helvetica Neue'
   }
 })
 
@@ -362,7 +388,8 @@ export const settingStyles = StyleSheet.create({
     marginBottom: 8,
     fontSize: 25,
     fontWeight: 'bold',
-    paddingLeft: 8
+    paddingLeft: 8,
+    fontFamily: 'Helvetica Neue'
   },
   textContainer: {
     padding: '10%',
@@ -370,15 +397,21 @@ export const settingStyles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'space-around',
     alignItems: 'flex-start',
-    borderRadius: 3,
+    borderRadius: 2,
   },
   text: {
     color: '#fff',
     marginBottom: 20,
     fontSize: 20,
-    paddingLeft: 8
+    paddingLeft: 8,
+    fontFamily: 'Helvetica Neue'
   },
-
+  changeTxt: {
+    color: '#9c9a9a',
+    fontSize: 20,
+    fontStyle: 'italic',
+    fontFamily: 'Helvetica Neue'
+  },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -387,13 +420,15 @@ export const settingStyles = StyleSheet.create({
   buttonTxt: {
     textAlign: 'center',
     color: '#FFFFFF',
-    fontWeight: '700'
+    fontWeight: '700',
+    fontSize: 15,
+    fontFamily: 'Helvetica Neue'
   },
   button: {
    backgroundColor: '#BD95AF',
-   paddingVertical:10,
+   paddingVertical:14,
    paddingHorizontal: 10,
-   width: '38%',
-   borderRadius: 10
+   width: '78%',
+   borderRadius: 2,
   }
 })
