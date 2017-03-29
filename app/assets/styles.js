@@ -1,4 +1,4 @@
-import {StyleSheet} from'react-native'
+import {StyleSheet} from 'react-native'
 
 export default StyleSheet.create({
   backgroundView: {
@@ -204,6 +204,20 @@ export const homeStyles = StyleSheet.create({
   textContainer: {
     padding: '10%',
     paddingBottom: '7%',
+  },
+  analyticsContainer: {
+    padding: '10%',
+    paddingBottom: '7%',
+    backgroundColor: '#353535',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  analyticsContainer2: {
+    padding: '10%',
+    paddingBottom: '7%',
+    backgroundColor: '#424242',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   btnContainer: {
     paddingLeft: '10%',

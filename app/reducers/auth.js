@@ -1,7 +1,7 @@
 import axios from 'axios'
 import localPhoneStorage from 'react-native-simple-store'
 import store from '../store'
-import { receiveAllDreams, receivePublicDreams } from './dreams'
+import { receiveAllDreams, fetchWeekAnalytics } from './dreams'
 //CONSTANTS
 const SET_USER = 'SET_USER'
 const REMOVE_USER = 'REMOVE_USER'
@@ -55,7 +55,7 @@ export const getUser = () =>
             } else {
               dispatch(setUser(data.user))
               dispatch(receiveAllDreams(data.user.id, token))
-              // dispatch(receivePublicDreams())
+              dispatch(fetchWeekAnalytics(data.user.id))
             }
 
           })
