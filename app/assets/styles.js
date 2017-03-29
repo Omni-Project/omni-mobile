@@ -301,6 +301,37 @@ export const modalStyles = StyleSheet.create({
 
 });
 
+export const webVRStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+   btnModal: {
+    position: "absolute",
+    bottom: "0%",
+    right: "40%",
+    width: 50,
+    height: 50,
+    backgroundColor: "transparent"
+  },
+  webView: {
+    marginTop: 0,
+    maxHeight: "100%",
+    width: "100%"
+  },
+  btnTextVisible: {
+    color: 'rgba(255, 255, 255, 0.5)',
+    fontSize: 30,
+    fontWeight: "bold"
+  },
+  btnTextInvisible: {
+    color: 'rgba(255, 255, 255, 0)',
+    fontSize: 30,
+    fontWeight: "bold"
+  }
+})
+
 export const settingStyles = StyleSheet.create({
   image: {
     marginTop: 20,

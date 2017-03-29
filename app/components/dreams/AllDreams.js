@@ -2,10 +2,9 @@
 import React, { Component } from 'react';
 import { Button, Dimensions, ScrollView, StatusBar, StyleSheet, View, KeyboardAvoidingView,  ListView, Image, TouchableOpacity, Text, Switch, WebView } from 'react-native';
 import store from '../../store'
-import { homeStyles, listViewStyles, modalStyles, journalStyles } from '../../assets/styles';
+import { homeStyles, listViewStyles, modalStyles, journalStyles, webVRStyles } from '../../assets/styles';
 import Modal from 'react-native-modalbox';
 import DreamModal from './DreamModal';
-import WebVRSingleSprite from './WebVRSingleSprite'
 import { receiveAllDreams, receivePublicDreams } from '../../reducers/dreams'
 import localPhoneStorage from 'react-native-simple-store'
 
@@ -47,37 +46,48 @@ export default class Dreams extends React.Component {
         swipeToClose: true,
         sliderValue: 0.3,
         selectedIndex: 0,
-        uri: ''
+        uri: '',
+        vr: false,
+        vertical: true
     };
     this.handlePress = this.handlePress.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.setDreamBoxes = this.setDreamBoxes.bind(this);
     this.togglePublicView = this.togglePublicView.bind(this)
+    this.openWebView = this.openWebView.bind(this)
+    this.closeWebView = this.closeWebView.bind(this)
+    this.handleOrientationChange = this.handleOrientationChange.bind(this)
   }
 
-handlePress(i, modal) {
-  if(modal === "modal1"){
+handlePress(i) {
     this.setState({selectedIndex: i})
     this.refs.modal1.open()
-  }else if(modal === "modal2"){
-    const user=store.getState().auth
-    const token=localPhoneStorage.get('token')
-      .then(token => {
-        //hardcoded to localhost for now
-        this.setState({uri: `http://localhost:1337/mobile-vr/${user.id}/${i.id}/${token}`})
-        this.refs.modal2.open()
-      })
-  }
 }
 
-handleClose(modal) {
-  if(modal === "modal1"){
+handleClose() {
     this.setState({isOpen: false})
     this.refs.modal1.close()
-  }else{
-    this.setState({isOpen: false})
-    this.refs.modal2.close()
-  }
+}
+
+openWebView(id) {
+  const user=store.getState().auth
+  const token=localPhoneStorage.get('token')
+    .then(token => {
+      //hardcoded to localhost for now
+      this.setState({vr: true, uri: `http://localhost:1337/mobile-vr/${user.id}/${id}/${token}`})
+    })
+}
+closeWebView(){
+  this.setState({vr: false}, () => {
+    this.refs.modal1.open()
+  })
+
+}
+
+handleOrientationChange(evt){
+  const layout = evt.nativeEvent.layout
+  if(layout.width > layout.height) this.setState({vertical: false})
+  else this.setState({vertical: true})
 }
 
 togglePublicView(val) {
@@ -127,7 +137,20 @@ setDreamBoxes(type) {
 render() {
   const dreamToPass = this.state.isPublic ? this.state.publicDreams[this.state.selectedIndex] : this.state.userDreams[this.state.selectedIndex]
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1}} onLayout={this.handleOrientationChange}>
+      {/*WEBVR View renders on top of everything*/}
+        { this.state.vr ?
+          <View style={webVRStyles.container}>
+              <WebView
+                source={{uri: this.state.uri}}
+                scalesPageToFit={true}
+                bounces={true}
+                scrollEnabled={false}
+                style={webVRStyles.webView}
+              />
+           {this.state.vertical? <TouchableOpacity onPress={this.closeWebView}><Text style={modalStyles.btn}>Close</Text></TouchableOpacity> : null }
+          </View> :
+        <View style={{flex:1}}>
          <StatusBar barStyle='light-content' />
           <View style={homeStyles.textContainer}>
             <Text style={homeStyles.text}>Dreams</Text>
@@ -166,31 +189,12 @@ render() {
               }
               </View>
             </ScrollView>
-            <TouchableOpacity onPress={() => this.handlePress(dreamToPass, "modal2")}><Text style={modalStyles.btn}>View Dream Sprite</Text></TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handleClose("modal1")}><Text style={modalStyles.btn}>Close</Text></TouchableOpacity>
-          </Modal>
-
-          {/*WEBVR MODAL*/}
-          <Modal
-            position='bottom'
-            style={modalStyles.modal}
-            ref={"modal2"}
-            swipeToClose={this.state.swipeToClose}
-            swipeArea={500}>
-              <WebView
-                source={{uri: this.state.uri}}
-                style={{marginTop: 0}}
-                scalesPageToFit={true}
-                bounces={true}
-                scrollEnabled={false}
-                style={{
-                  marginTop: 0,
-                  maxHeight: "100%",
-                  width: "100%",
-                }}
-              />
+            <TouchableOpacity onPress={() => this.openWebView(dreamToPass.id)}><Text style={modalStyles.btn}>View Dream Sprite</Text></TouchableOpacity>
+            <TouchableOpacity onPress={this.handleClose}><Text style={modalStyles.btn}>Close</Text></TouchableOpacity>
           </Modal>
         </View>
+      }
+      </View>
     )
   }
 }
