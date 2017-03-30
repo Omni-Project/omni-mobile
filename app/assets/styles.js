@@ -171,7 +171,8 @@ export const loginStyles = StyleSheet.create({
 
 export const loginFormStyles = StyleSheet.create({
   container: {
-      padding: 20
+      padding: 20,
+      paddingTop: 0
   },
   helloContainer:{
       paddingHorizontal: 10,

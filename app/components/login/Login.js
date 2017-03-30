@@ -14,12 +14,12 @@ export default class Login extends Component {
         <View style={loginStyles.logoContainer}>
         {/*Temporary image to be replaced later*/}
             <Image
-            source={require('../../assets/logo.jpg')}
-            style={{height:100, width: 300, marginBottom: 10}}
+            source={require('../../assets/logo.png')}
+            style={{height:120, width: 300, marginBottom: 10, marginRight: 25}}
             />
             <Text style={loginStyles.title}>An app made for fellow dreamers to track their dreams</Text>
         </View>
-        <View style={loginStyles.formContainer}>
+        <View>
         <LoginForm />
         </View>
       </KeyboardAvoidingView>
